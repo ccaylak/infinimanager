@@ -23,7 +23,7 @@
               <b-icon-pencil-square font-scale="1.5"></b-icon-pencil-square>
             </b-button>
             <delete-dashboard-modal
-                :name="dashboard.name"
+              :name="dashboard.name"
             ></delete-dashboard-modal>
           </b-col>
         </b-row>
@@ -39,7 +39,7 @@ import DeleteDashboardModal from "@/components/DeleteDashboardModal";
 export default {
   name: "DashboardListItem",
   components: {
-    DeleteDashboardModal,
+    DeleteDashboardModal
   },
   props: {
     dashboard: {

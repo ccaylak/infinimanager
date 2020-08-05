@@ -34,8 +34,8 @@ export default {
   data() {
     return {
       form: {
-        name: null,
-        description: null
+        name: "",
+        description: ""
       }
     };
   },

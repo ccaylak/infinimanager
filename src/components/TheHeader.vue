@@ -18,13 +18,11 @@
 </template>
 
 <script>
-import { BIconBoxArrowRight } from "bootstrap-vue";
 import AddDashboardModal from "@/components/AddDashboardModal";
 
 export default {
   components: {
-    AddDashboardModal,
-    BIconBoxArrowRight
+    AddDashboardModal
   },
   name: "TheHeader"
 };
