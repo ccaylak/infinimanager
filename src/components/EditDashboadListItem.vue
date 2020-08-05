@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import {BIconArrowLeftShort} from "bootstrap-vue";
+import { BIconArrowLeftShort } from "bootstrap-vue";
 
 export default {
   name: "EditDashboadListItem",
@@ -30,7 +30,7 @@ export default {
     return {
       name: "Dashboard name",
       description: "Dashboard description"
-    }
+    };
   }
-}
+};
 </script>

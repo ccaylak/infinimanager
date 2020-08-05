@@ -1,48 +1,44 @@
 <template>
   <div>
-    <b-container fluid>
-      <b-row>
-        <b-col></b-col>
-        <b-col lg="9">
-          <!--
-          <h1 class="font-weight-bolder">
-            No dashboards available
-            <p>Go on create some</p>
-          </h1>
-          -->
-
-          <b-table hover :items="dashboards" :fields="fields">
-            <template v-slot:cell(actions)>
-              <b-button variant="outline-dark"
-                ><b-icon-pencil-square></b-icon-pencil-square
-              ></b-button>
-              <b-button variant="outline-dark"
-                ><b-icon-trash-fill></b-icon-trash-fill
-              ></b-button>
-            </template>
-          </b-table>
-        </b-col>
-        <b-col></b-col>
-      </b-row>
-    </b-container>
+    <dashboard-list-item
+      v-for="dashboard in dashboards"
+      :key="dashboard.index"
+      :dashboard="dashboard"
+    />
   </div>
 </template>
 
 <script>
-import { BIconTrashFill, BIconPencilSquare } from "bootstrap-vue";
+import DashboardListItem from "@/components/DashboardListItem";
+
 export default {
   name: "TheDashboardList",
   components: {
-    BIconTrashFill,
-    BIconPencilSquare
+    DashboardListItem
   },
   data() {
     return {
       dashboards: [
-        { name: "Dashboard name", description: "Dashboard description" },
-        { name: "Adesso-Kicker", description: "Tool to manage games" },
-        { name: "Projectboard", description: "Tool to manage projects" },
-        { name: "SEPL", description: "Tool to manage employees" }
+        {
+          index: 1,
+          name: "Dashboard name",
+          description: "Dashboard description"
+        },
+        {
+          index: 2,
+          name: "Adesso-Kicker",
+          description: "Tool to manage games"
+        },
+        {
+          index: 3,
+          name: "Projectboard",
+          description: "Tool to manage projects"
+        },
+        {
+          index: 4,
+          name: "SEPL",
+          description: "Tool to manage employees"
+        }
       ],
       fields: ["name", "description", "Actions"]
     };
