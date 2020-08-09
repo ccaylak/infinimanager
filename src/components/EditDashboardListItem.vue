@@ -2,7 +2,10 @@
   <b-container fluid>
     <b-row>
       <b-col align-self="center" class="text-center">
-        <b-icon-arrow-left-short font-scale="4"></b-icon-arrow-left-short>
+        <b-icon-arrow-left-short
+          @click="toHome"
+          font-scale="4"
+        ></b-icon-arrow-left-short>
       </b-col>
       <b-container style="background-color: lightgrey">
         <b-row class="p-4">
@@ -26,21 +29,27 @@
       </b-container>
       <b-col></b-col>
     </b-row>
+    <divider-widget></divider-widget>
   </b-container>
 </template>
 
 <script>
 import AddWidgetDividerButton from "@/components/AddWidgetDividerButton";
 import AddWidgetButton from "@/components/AddWidgetButton";
+import DividerWidget from "@/components/DividerWidget";
 
 export default {
   name: "EditDashboardListItem",
-  components: { AddWidgetButton, AddWidgetDividerButton },
+  components: { DividerWidget, AddWidgetButton, AddWidgetDividerButton },
   data() {
     return {
-      name: "Dashboard name",
-      description: "Dashboard description"
+      dashboard: ""
     };
+  },
+  methods: {
+    toHome() {
+      this.$router.push("../home");
+    }
   }
 };
 </script>

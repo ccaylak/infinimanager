@@ -1,13 +1,12 @@
 <template>
   <div id="app">
     <TheHeader />
-    <EditDashboardListItem />
+    <router-view></router-view>
   </div>
 </template>
 <script>
 import TheHeader from "@/components/TheHeader";
-import EditDashboardListItem from "@/components/EditDashboardListItem";
 export default {
-  components: { EditDashboardListItem, TheHeader }
+  components: { TheHeader },
 };
 </script>

@@ -19,9 +19,9 @@
             </div>
           </b-col>
           <b-col sm="1">
-            <b-button class="m-2">
-              <b-icon-pencil-square font-scale="1.5"></b-icon-pencil-square>
-            </b-button>
+            <edit-dashboard-liste-item-button
+              :slug="dashboard.slug"
+            ></edit-dashboard-liste-item-button>
             <delete-dashboard-modal
               :name="dashboard.name"
             ></delete-dashboard-modal>
@@ -35,19 +35,20 @@
 
 <script>
 import DeleteDashboardModal from "@/components/DeleteDashboardModal";
+import EditDashboardListeItemButton from "@/components/EditDashboardListeItemButton";
 
 export default {
   name: "DashboardListItem",
   components: {
+    EditDashboardListeItemButton,
     DeleteDashboardModal
   },
   props: {
     dashboard: {
       name: String,
-      description: String
+      description: String,
+      slug: String
     }
   }
 };
 </script>
-
-<style scoped></style>

@@ -4,21 +4,29 @@
 
     <b-modal id="modal-center" centered title="Add dashboard" hide-footer>
       <b-form @submit="onSubmit">
-        <b-form-group label="Dashboard name" label-for="dashboard-name-input">
+        <b-form-group label="Name" label-for="dashboard-name-input">
           <b-form-input
             id="dashboard-name-input"
-            v-model="form.name"
+            v-model="dashboard.name"
+            type="text"
+            required
+          ></b-form-input>
+        </b-form-group>
+        <b-form-group label="Slug" label-for="dashboard-name-input">
+          <b-form-input
+            id="dashboard-name-input"
+            v-model="dashboard.slug"
             type="text"
             required
           ></b-form-input>
         </b-form-group>
         <b-form-group
-          label="Dashboard description"
+          label="Description"
           label-for="dashboard-description-input"
         >
           <b-form-input
             id="dashboard-description-input"
-            v-model="form.description"
+            v-model="dashboard.description"
             type="text"
           ></b-form-input>
         </b-form-group>
@@ -29,23 +37,35 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "AddDashboardModal",
   data() {
     return {
-      form: {
+      dashboard: {
         name: "",
+        slug: "",
         description: ""
       }
     };
   },
   methods: {
     onSubmit(event) {
+      axios
+        .post("http://localhost:8080/api/dashboards", {
+          name: this.dashboard.name,
+          slug: this.dashboard.slug,
+          description: this.dashboard.description
+        })
+        .then(function(response) {
+          console.log(response);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
       event.preventDefault();
-      alert(JSON.stringify(this.form));
     }
   }
 };
 </script>
-
-<style scoped></style>

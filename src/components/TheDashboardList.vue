@@ -2,13 +2,14 @@
   <div>
     <dashboard-list-item
       v-for="dashboard in dashboards"
-      :key="dashboard.index"
+      :key="dashboard.slug"
       :dashboard="dashboard"
     />
   </div>
 </template>
 
 <script>
+import axios from "axios";
 import DashboardListItem from "@/components/DashboardListItem";
 
 export default {
@@ -16,31 +17,18 @@ export default {
   components: {
     DashboardListItem
   },
+  mounted() {
+    axios
+      .get("http://localhost:8080/api/dashboards")
+      .then(
+        response =>
+          (this.dashboards = response.data._embedded.dashboardResourceList)
+      )
+      .catch(error => console.log(error));
+  },
   data() {
     return {
-      dashboards: [
-        {
-          index: 1,
-          name: "Dashboard name",
-          description: "Dashboard description"
-        },
-        {
-          index: 2,
-          name: "Adesso-Kicker",
-          description: "Tool to manage games"
-        },
-        {
-          index: 3,
-          name: "Projectboard",
-          description: "Tool to manage projects"
-        },
-        {
-          index: 4,
-          name: "SEPL",
-          description: "Tool to manage employees"
-        }
-      ],
-      fields: ["name", "description", "Actions"]
+      dashboards: []
     };
   }
 };
