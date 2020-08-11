@@ -12,9 +12,9 @@
     "bootstrap": "^4.5.0",
     "bootstrap-vue": "^2.16.0",
     "core-js": "^3.6.5",
+    "vee-validate": "^3.3.9",
     "vue": "^2.6.11",
-    "vue-router": "^3.2.0",
-    "vuelidate": "^0.7.5"
+    "vue-router": "^3.2.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",

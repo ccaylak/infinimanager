@@ -9,7 +9,7 @@
         <b-form-group label="Name" label-for="dashboard-name-input">
           <b-form-input
             id="dashboard-name-input"
-            v-model="$v.dashboard.name.$model"
+            v-model="dashboard.name"
             type="text"
           ></b-form-input>
         </b-form-group>
@@ -17,7 +17,7 @@
         <b-form-group label="Slug" label-for="dashboard-name-input">
           <b-form-input
             id="dashboard-name-input"
-            v-model="$v.dashboard.slug.$model"
+            v-model="dashboard.slug"
             type="text"
           ></b-form-input>
         </b-form-group>
@@ -28,7 +28,7 @@
         >
           <b-form-input
             id="dashboard-description-input"
-            v-model="$v.dashboard.description.$model"
+            v-model="dashboard.description"
             type="text"
           ></b-form-input>
         </b-form-group>
@@ -41,7 +41,6 @@
 
 <script>
 import axios from "axios";
-import { required } from "vuelidate/lib/validators";
 
 export default {
   name: "AddDashboardModal",
@@ -54,33 +53,25 @@ export default {
       }
     };
   },
-  validations: {
-    dashboard: {
-      name: {
-        required
-      },
-      description: {
-        required
-      },
-      slug: {
-        required
-      }
-    }
-  },
   methods: {
     onSubmit(event) {
-      axios
-        .post("http://localhost:8080/api/dashboards", {
-          name: this.dashboard.name,
-          slug: this.dashboard.slug,
-          description: this.dashboard.description
-        })
-        .then(function(response) {
-          console.log(response);
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        console.log("Bitte erst Daten angeben");
+      } else {
+        axios
+          .post("http://localhost:8080/api/dashboards", {
+            name: this.dashboard.name,
+            slug: this.dashboard.slug,
+            description: this.dashboard.description
+          })
+          .then(function(response) {
+            console.log(response);
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      }
       event.preventDefault();
     }
   }
