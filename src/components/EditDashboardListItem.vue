@@ -4,6 +4,7 @@
       <b-col align-self="center" class="text-center">
         <!-- Back to dashboard list button -->
         <b-icon-arrow-left-short
+          class="clickable"
           @click="toHome"
           font-scale="4"
         ></b-icon-arrow-left-short>
@@ -13,11 +14,11 @@
           <b-col>
             <!-- Dashboard name -->
             <div class="h1 font-weight-bolder">
-              Dashboard name
+              {{ dashboard.name }}
             </div>
             <!-- Dashboard description -->
             <div class="font-weight-lighter">
-              Dashboard description
+              {{ dashboard.description }}
             </div>
             <b-row class="pt-5">
               <b-col>
@@ -42,14 +43,26 @@
 import AddWidgetDividerButton from "@/components/AddWidgetDividerButton";
 import AddWidgetButton from "@/components/AddWidgetButton";
 import DividerWidget from "@/components/DividerWidget";
+import axios from "axios";
 
 export default {
   name: "EditDashboardListItem",
   components: { DividerWidget, AddWidgetButton, AddWidgetDividerButton },
   data() {
     return {
-      dashboard: ""
+      dashboard: {
+        name: null,
+        description: null
+      }
     };
+  },
+  mounted() {
+    axios
+      .get("http://localhost:8080/api/dashboards/" + this.$route.params.slug)
+      .then(response => {
+        this.dashboard.name = response.data.name;
+        this.dashboard.description = response.data.description;
+      });
   },
   methods: {
     toHome() {
