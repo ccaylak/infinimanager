@@ -7,7 +7,9 @@
           <b-col>
             <div class="h2">
               <u>
+                <!-- Divider widget name -->
                 Divider Widget
+                <!-- Divider widget description -->
                 <span class="font-weight-lighter">- Description</span>
               </u>
             </div>

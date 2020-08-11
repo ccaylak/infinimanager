@@ -11,17 +11,21 @@
       <b-container>
         <b-row class="p-3">
           <b-col>
+            <!-- Dashboard name -->
             <div class="h1 font-weight-bolder">
               {{ dashboard.name }}
             </div>
+            <!-- Dashboard description -->
             <div class="font-weight-lighter">
               {{ dashboard.description }}
             </div>
           </b-col>
           <b-col sm="1">
+            <!-- Edit dashboard button -->
             <edit-dashboard-liste-item-button
               :slug="dashboard.slug"
             ></edit-dashboard-liste-item-button>
+            <!-- Delete dashboard button -->
             <delete-dashboard-modal
               :name="dashboard.name"
             ></delete-dashboard-modal>
