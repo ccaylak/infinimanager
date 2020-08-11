@@ -55,23 +55,18 @@ export default {
   },
   methods: {
     onSubmit(event) {
-      this.$v.$touch();
-      if (this.$v.$invalid) {
-        console.log("Bitte erst Daten angeben");
-      } else {
-        axios
-          .post("http://localhost:8080/api/dashboards", {
-            name: this.dashboard.name,
-            slug: this.dashboard.slug,
-            description: this.dashboard.description
-          })
-          .then(function(response) {
-            console.log(response);
-          })
-          .catch(function(error) {
-            console.log(error);
-          });
-      }
+      axios
+        .post("http://localhost:8080/api/dashboards", {
+          name: this.dashboard.name,
+          slug: this.dashboard.slug,
+          description: this.dashboard.description
+        })
+        .then(function(response) {
+          console.log(response);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
       event.preventDefault();
     }
   }

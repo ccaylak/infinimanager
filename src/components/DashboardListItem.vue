@@ -9,7 +9,7 @@
       </h1>
       -->
       <b-container>
-        <b-row class="p-3">
+        <b-row class="p-3" style="box-shadow: 2px 0 7px -1px rgba(0,0,0,0.53);">
           <b-col>
             <!-- Dashboard name -->
             <div class="h1 font-weight-bolder">

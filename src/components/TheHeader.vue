@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Header title -->
-    <b-navbar variant="primary" type="dark">
+    <b-navbar class="navbar" type="dark">
       <b-navbar-brand tag="h1" class="mb-0">InfiniManager</b-navbar-brand>
 
       <!-- Add dashboard button -->
@@ -30,3 +30,9 @@ export default {
   name: "TheHeader"
 };
 </script>
+
+<style scoped>
+.navbar {
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+}
+</style>
