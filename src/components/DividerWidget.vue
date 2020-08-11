@@ -5,7 +5,7 @@
       <b-container>
         <b-row class="p-4">
           <b-col>
-            <div class="h2">
+            <div class="h4">
               <u>
                 <!-- Divider widget name -->
                 Divider Widget
