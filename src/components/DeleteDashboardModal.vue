@@ -19,15 +19,20 @@
 </template>
 
 <script>
-
+import axios from "axios";
 export default {
   name: "DeleteDashboardModal",
   props: {
-    name: String
+    name: String,
+    slug: String
   },
   methods: {
     onDelete() {
-      alert("gelösch");
+      axios
+        .delete("http://localhost:8080/api/dashboards/" + this.slug)
+        .then(() => {
+          this.$bvModal.hide(this.name);
+        });
     }
   }
 };

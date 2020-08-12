@@ -28,6 +28,7 @@
             <!-- Delete dashboard button -->
             <delete-dashboard-modal
               :name="dashboard.name"
+              :slug="dashboard.slug"
             ></delete-dashboard-modal>
           </b-col>
         </b-row>
