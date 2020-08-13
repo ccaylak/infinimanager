@@ -76,7 +76,7 @@
 import axios from "axios";
 
 export default {
-  name: "AddDashboardModal",
+  name: "AddNavItemDashboard",
   data() {
     return {
       dashboard: {

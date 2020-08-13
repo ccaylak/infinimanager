@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "EditDashboardListeItemButton",
+  name: "EditButtonDashboardListItem",
   methods: {
     editDashboard() {
       this.$router.push("dashboard/" + this.slug);

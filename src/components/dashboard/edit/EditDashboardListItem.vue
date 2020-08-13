@@ -23,11 +23,11 @@
             <b-row class="pt-5">
               <b-col>
                 <!-- Add widget divider button -->
-                <add-widget-divider-button></add-widget-divider-button>
+                <add-button-divider-widget></add-button-divider-widget>
               </b-col>
               <b-col>
                 <!-- Add widget button -->
-                <add-widget-button></add-widget-button>
+                <add-button-widget></add-button-widget>
               </b-col>
             </b-row>
           </b-col>
@@ -35,19 +35,19 @@
       </b-container>
       <b-col></b-col>
     </b-row>
-    <divider-widget></divider-widget>
+    <TheWidgetList />
   </b-container>
 </template>
 
 <script>
-import AddWidgetDividerButton from "@/components/AddWidgetDividerButton";
-import AddWidgetButton from "@/components/AddWidgetButton";
-import DividerWidget from "@/components/DividerWidget";
+import AddButtonDividerWidget from "@/components/dashboard/edit/AddButtonDividerWidget";
+import AddButtonWidget from "@/components/dashboard/edit/AddButtonWidget";
 import axios from "axios";
+import TheWidgetList from "@/components/dashboard/edit/widget/TheWidgetList";
 
 export default {
-  name: "EditDashboardListItem",
-  components: { DividerWidget, AddWidgetButton, AddWidgetDividerButton },
+  name: "EditDashboardItem",
+  components: { TheWidgetList, AddButtonDividerWidget, AddButtonWidget },
   data() {
     return {
       dashboard: {

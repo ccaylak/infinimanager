@@ -21,7 +21,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "DeleteDashboardModal",
+  name: "DeleteButtonDashboardListItem",
   props: {
     name: String,
     slug: String

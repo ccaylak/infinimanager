@@ -39,8 +39,8 @@
 </template>
 
 <script>
-import DeleteDashboardModal from "@/components/DeleteDashboardModal";
-import EditDashboardListeItemButton from "@/components/EditDashboardListeItemButton";
+import DeleteDashboardModal from "@/components/dashboard/list/DeleteButtonDashboardListItem";
+import EditDashboardListeItemButton from "@/components/dashboard/list/EditButtonDashboardListItem";
 
 export default {
   name: "DashboardListItem",

@@ -8,14 +8,17 @@
             <div class="h4">
               <u>
                 <!-- Divider widget name -->
-                Divider Widget
+                {{ title }}
                 <!-- Divider widget description -->
-                <span class="font-weight-lighter">- Description</span>
+                <span class="font-weight-lighter">- {{ description }}</span>
               </u>
             </div>
           </b-col>
           <b-col sm="0.5">
-            <delete-divider-widget></delete-divider-widget>
+            <delete-button-divider-widget
+              :title="title"
+              :widget-id="widgetId"
+            ></delete-button-divider-widget>
           </b-col>
         </b-row>
       </b-container>
@@ -25,10 +28,15 @@
 </template>
 
 <script>
-import DeleteDividerWidget from "@/components/DeleteDividerWidget";
+import DeleteButtonDividerWidget from "@/components/dashboard/edit/DeleteButtonDividerWidget";
 
 export default {
   name: "DividerWidget",
-  components: { DeleteDividerWidget }
+  components: { DeleteButtonDividerWidget },
+  props: {
+    title: String,
+    description: String,
+    widgetId: String
+  }
 };
 </script>

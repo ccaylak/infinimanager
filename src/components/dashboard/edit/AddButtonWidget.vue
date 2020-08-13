@@ -53,7 +53,7 @@
 
 <script>
 export default {
-  name: "AddWidgetButton",
+  name: "AddButtonWidget",
   data() {
     return {
       name: "",

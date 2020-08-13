@@ -1,13 +1,13 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import TheDashboardList from "@/components/TheDashboardList";
-import EditDashboardListItem from "@/components/EditDashboardListItem";
+import TheDashboardList from "@/components/dashboard/list/TheDashboardList";
+import EditDashboardItem from "@/components/dashboard/edit/EditDashboardListItem";
 
 Vue.use(VueRouter);
 
 const routes = [
   { path: "/home", component: TheDashboardList },
-  { path: "/dashboard/:slug", component: EditDashboardListItem }
+  { path: "/dashboard/:slug", component: EditDashboardItem }
 ];
 
 const router = new VueRouter({

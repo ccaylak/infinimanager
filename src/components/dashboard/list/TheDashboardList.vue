@@ -1,6 +1,6 @@
 <template>
   <div>
-    <dashboard-list-item
+    <dashboard-item
       v-for="dashboard in dashboards"
       :key="dashboard.slug"
       :dashboard="dashboard"
@@ -10,12 +10,12 @@
 
 <script>
 import axios from "axios";
-import DashboardListItem from "@/components/DashboardListItem";
+import DashboardItem from "@/components/dashboard/list/DashboardListItem";
 
 export default {
   name: "TheDashboardList",
   components: {
-    DashboardListItem
+    DashboardItem
   },
   mounted() {
     axios

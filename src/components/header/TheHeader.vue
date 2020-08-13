@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import AddDashboardModal from "@/components/AddDashboardModal";
+import AddDashboardModal from "@/components/header/AddNavItemDashboard";
 
 export default {
   components: {
