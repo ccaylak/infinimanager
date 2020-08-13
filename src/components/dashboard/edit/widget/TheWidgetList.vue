@@ -7,16 +7,18 @@
       :description="widget.description"
       :widget-id="widget._id"
     ></divider-widget>
+    <jenkins-widget></jenkins-widget>
   </div>
 </template>
 
 <script>
 import DividerWidget from "@/components/dashboard/edit/widget/DividerWidget";
 import axios from "axios";
+import JenkinsWidget from "@/components/dashboard/edit/widget/JenkinsWidget";
 
 export default {
   name: "TheWidgetList",
-  components: { DividerWidget },
+  components: { JenkinsWidget, DividerWidget },
   data() {
     return {
       widgets: []
