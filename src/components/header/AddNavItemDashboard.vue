@@ -97,7 +97,7 @@ export default {
         }
       });
       axios
-        .post("http://localhost:8080/api/dashboards", {
+        .post(process.env.VUE_APP_BASE_URL + "/api/dashboards", {
           name: this.dashboard.name,
           slug: this.dashboard.slug,
           description: this.dashboard.description

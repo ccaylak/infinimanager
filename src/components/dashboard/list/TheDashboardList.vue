@@ -1,6 +1,7 @@
 <template>
   <div>
     <dashboard-item
+      class="listItem"
       v-for="dashboard in dashboards"
       :key="dashboard.slug"
       :dashboard="dashboard"
@@ -19,7 +20,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:8080/api/dashboards")
+      .get(process.env.VUE_APP_BASE_URL + "/api/dashboards")
       .then(
         response =>
           (this.dashboards = response.data._embedded.dashboardResourceList)
@@ -33,3 +34,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.listItem {
+  background-color: #8ec5fc;
+  background-image: linear-gradient(62deg, #8ec5fc 0%, #e0c3fc 100%);
+}
+</style>

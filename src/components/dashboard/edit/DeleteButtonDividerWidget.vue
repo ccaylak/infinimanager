@@ -25,19 +25,23 @@ export default {
     title: String,
     widgetId: String
   },
+  data() {
+    return {
+      deleteURL: String
+    };
+  },
+  mounted() {
+    axios
+      .get(
+        process.env.VUE_APP_BASE_URL +
+          "/api/dashboards/" +
+          this.$route.params.slug +
+          "/widgets"
+      )
+      .then(response => console.log(response));
+  },
   methods: {
-    onClick() {
-      axios
-        .delete(
-          "http://localhost:8080/api/dashboards/" +
-            this.$route.params.slug +
-            "/widgets/" +
-            this.widgetId
-        )
-        .then(() => {
-          this.$bvModal.hide(this.title);
-        });
-    }
+    onClick() {}
   }
 };
 </script>

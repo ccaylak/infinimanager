@@ -1,7 +1,6 @@
 <template>
-  <b-container fluid>
+  <b-container>
     <b-row>
-      <b-col></b-col>
       <!--
       <h1 class="font-weight-bolder">
         No dashboards available
@@ -9,7 +8,7 @@
       </h1>
       -->
       <b-container>
-        <b-row class="p-3" style="box-shadow: 2px 0 7px -1px rgba(0,0,0,0.53);">
+        <b-row class="p-3 border-bottom border-left border-right">
           <b-col>
             <!-- Dashboard name -->
             <div class="h1 font-weight-bolder">
@@ -20,7 +19,7 @@
               {{ dashboard.description }}
             </div>
           </b-col>
-          <b-col sm="1">
+          <b-col sm="1.5">
             <!-- Edit dashboard button -->
             <edit-dashboard-liste-item-button
               :slug="dashboard.slug"
@@ -33,7 +32,6 @@
           </b-col>
         </b-row>
       </b-container>
-      <b-col></b-col>
     </b-row>
   </b-container>
 </template>

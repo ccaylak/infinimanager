@@ -1,23 +1,33 @@
 <template>
   <div id="app">
     <TheHeader />
-    <router-view
-      style="background-color: #8EC5FC;
-background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
-"
-    ></router-view>
+    <router-view class="headerOverlap footerOverlap"></router-view>
+    <TheFooter />
   </div>
 </template>
 <script>
 import TheHeader from "@/components/header/TheHeader";
+import TheFooter from "@/footer/TheFooter";
 
 export default {
-  components: { TheHeader }
+  components: { TheFooter, TheHeader }
 };
 </script>
 
 <style>
 .clickable {
   cursor: pointer;
+}
+.background {
+  background-color: #2f4353;
+  background-image: linear-gradient(315deg, #2f4353 0%, #d2ccc4 74%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.headerOverlap {
+  padding-top: 56px;
+}
+.footerOverlap {
+  padding-bottom: 56px;
 }
 </style>

@@ -1,58 +1,92 @@
 <template>
-  <b-container fluid>
-    <b-row>
-      <b-col></b-col>
-      <b-container>
-        <b-row class="p-2">
-           <b-col>
-            <b-card
-              title="WEB-DEV"
-              tag="article"
-              style="max-width: 20rem;"
-              class="mb-2"
+  <b-container>
+    <b-card-group columns>
+      <b-card
+        title="Card title that wraps to a new line"
+        img-src="https://placekitten.com/g/400/450"
+        img-alt="Image"
+        img-top
+      >
+        <b-card-text>
+          This is a wider card with supporting text below as a natural lead-in
+          to additional content. This content is a little bit longer.
+        </b-card-text>
+      </b-card>
+
+      <b-card header="Quote">
+        <blockquote class="blockquote mb-0">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+            posuere erat a ante.
+          </p>
+          <footer class="blockquote-footer">
+            Someone famous in <cite title="Source Title">Source Title</cite>
+          </footer>
+        </blockquote>
+      </b-card>
+
+      <b-card
+        title="Title"
+        img-src="https://placekitten.com/500/350"
+        img-alt="Image"
+        img-top
+      >
+        <b-card-text>
+          This card has supporting text below as a natural lead-in to additional
+          content.
+        </b-card-text>
+        <b-card-text class="small text-muted"
+          >Last updated 3 mins ago</b-card-text
+        >
+      </b-card>
+
+      <b-card bg-variant="primary" text-variant="white">
+        <blockquote class="card-blockquote">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+            posuere erat a ante.
+          </p>
+          <footer>
+            <small
+              >Someone famous in
+              <cite title="Source Title">Source Title</cite></small
             >
-              <b-card-text>
-                6.5.0.0.38700
-              </b-card-text>
-              <b-card-text>
-                NACHTTEST 3
-              </b-card-text>
-            </b-card>
-          </b-col>
-          <b-col>
-            <b-card
-              title="WEB-TEST"
-              tag="article"
-              style="max-width: 20rem;"
-              class="mb-2"
-            >
-              <b-card-text>
-                6.4.2.1.38652
-              </b-card-text>
-              <b-card-text>
-                SUPPORT TEAM
-              </b-card-text>
-            </b-card>
-          </b-col>
-          <b-col>
-            <b-card
-              title="REGRESSION"
-              tag="article"
-              style="max-width: 20rem;"
-              class="mb-2"
-            >
-              <b-card-text>
-                6.5.0.0.38717
-              </b-card-text>
-              <b-card-text>
-                REGRISSIONSTEST
-              </b-card-text>
-            </b-card>
-          </b-col>
-        </b-row>
-      </b-container>
-      <b-col></b-col>
-    </b-row>
+          </footer>
+        </blockquote>
+      </b-card>
+
+      <b-card>
+        <b-card-title>Title</b-card-title>
+        <b-card-text>
+          This card has supporting text below as a natural lead-in to additional
+          content.
+        </b-card-text>
+        <b-card-text class="small text-muted"
+          >Last updated 3 mins ago</b-card-text
+        >
+      </b-card>
+
+      <b-card
+        img-src="https://picsum.photos/400/400/?image=41"
+        img-alt="Image"
+        overlay
+      ></b-card>
+
+      <b-card
+        img-src="https://picsum.photos/400/200/?image=41"
+        img-alt="Image"
+        img-top
+      >
+        <b-card-text>
+          This is a wider card with supporting text below as a natural lead-in
+          to additional content. This card has even longer content than the
+          first.
+        </b-card-text>
+        <template v-slot:footer>
+          <small class="text-muted">Footer Text</small>
+        </template>
+      </b-card>
+    </b-card-group>
   </b-container>
 </template>
 
@@ -61,5 +95,3 @@ export default {
   name: "JenkinsWidget"
 };
 </script>
-
-<style scoped></style>

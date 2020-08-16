@@ -6,40 +6,14 @@
     </b-button>
     <!-- Add widget modal window -->
     <b-modal id="add-widget" centered title="Add widget divider" hide-footer>
-      <b-form @submit="onSubmit">
-        <b-form-group label="Add to divider:" label-for="dashboard-select">
-          <b-form-select
-            id="dashboard-select"
-            :options="dashboards"
-            required
-          ></b-form-select>
-        </b-form-group>
+      <b-form @submit.prevent="onSubmit">
         <!-- Widget name input -->
         <b-form-group label="Widget name" label-for="widget-name-input">
           <b-form-input
             id="widget-name-input"
-            v-model="name"
+            v-model="widget.title"
             type="text"
             required
-          ></b-form-input>
-        </b-form-group>
-        <!-- Widget description input -->
-        <b-form-group
-          label="Widget description"
-          label-for="widget-description-input"
-        >
-          <b-form-input
-            id="widget-description-input"
-            v-model="description"
-            type="text"
-          ></b-form-input>
-        </b-form-group>
-        <!-- Widget tag input -->
-        <b-form-group label="Widget tag" label-for="widget-tag-input">
-          <b-form-input
-            id="widget-tag-input"
-            v-model="tag"
-            type="text"
           ></b-form-input>
         </b-form-group>
         <!-- Widget submit button -->
@@ -56,17 +30,15 @@ export default {
   name: "AddButtonWidget",
   data() {
     return {
-      name: "",
-      description: "",
-      tag: "",
-      dashboards: ["Dashboard", "Adesso", "Hello"]
+      widget: {
+        title: "",
+        type: "jenkins"
+      },
+      status: []
     };
   },
   methods: {
-    onSubmit(event) {
-      event.preventDefault();
-      JSON.stringify(this.name, this.description);
-    }
+    onSubmit() {}
   }
 };
 </script>

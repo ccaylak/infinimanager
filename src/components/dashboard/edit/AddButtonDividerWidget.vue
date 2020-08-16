@@ -78,7 +78,8 @@ export default {
       });
       axios
         .post(
-          "http://localhost:8080/api/dashboards/" +
+          process.env.VUE_APP_BASE_URL +
+            "/dashboards/" +
             this.$route.params.slug +
             "/widgets",
           {

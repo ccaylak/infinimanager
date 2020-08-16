@@ -29,7 +29,7 @@ export default {
   methods: {
     onDelete() {
       axios
-        .delete("http://localhost:8080/api/dashboards/" + this.slug)
+        .delete(process.env.VUE_APP_BASE_URL + "/api/dashboards/" + this.slug)
         .then(() => {
           this.$bvModal.hide(this.name);
         });

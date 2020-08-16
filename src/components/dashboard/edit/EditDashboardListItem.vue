@@ -1,7 +1,7 @@
 <template>
-  <b-container fluid>
+  <b-container>
     <b-row>
-      <b-col align-self="center" class="text-center">
+      <b-col align-self="center" class="text-center border-bottom">
         <!-- Back to dashboard list button -->
         <b-icon-arrow-left-short
           class="clickable"
@@ -9,8 +9,8 @@
           font-scale="4"
         ></b-icon-arrow-left-short>
       </b-col>
-      <b-container style="background-color: lightgrey">
-        <b-row class="p-4">
+      <b-container>
+        <b-row class="p-4 border-bottom">
           <b-col>
             <!-- Dashboard name -->
             <div class="h1 font-weight-bolder">
@@ -33,9 +33,8 @@
           </b-col>
         </b-row>
       </b-container>
-      <b-col></b-col>
     </b-row>
-    <TheWidgetList />
+    <TheWidgetList class="pt-3" />
   </b-container>
 </template>
 
