@@ -10,10 +10,10 @@
       <div class="d-block text-center">
         <h3>Do you really want to delete {{ name }}?</h3>
       </div>
-      <!-- Delete dashboard no button -->
-      <b-button class="mt-3" @click="$bvModal.hide(name)" block>No</b-button>
       <!-- Delete dashboard yes button -->
       <b-button class="mt-3" @click="onDelete" block>Yes</b-button>
+      <!-- Delete dashboard no button -->
+      <b-button class="mt-3" @click="$bvModal.hide(name)" block>No</b-button>
     </b-modal>
   </div>
 </template>

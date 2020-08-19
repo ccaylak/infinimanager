@@ -5,7 +5,7 @@
         <!-- Back to dashboard list button -->
         <b-icon-arrow-left-short
           class="clickable"
-          @click="toHome"
+          @click="toRoot"
           font-scale="4"
         ></b-icon-arrow-left-short>
       </b-col>
@@ -64,8 +64,8 @@ export default {
       });
   },
   methods: {
-    toHome() {
-      this.$router.push("../home");
+    toRoot() {
+      this.$router.push("../");
     }
   }
 };

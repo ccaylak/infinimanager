@@ -108,11 +108,11 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
-      this.dashboard.name = this.dashboard.slug = this.dashboard.description =
-        "";
       this.$nextTick(() => {
         this.$refs.form.reset();
         this.$bvModal.hide("modal-center");
+        this.dashboard.name = this.dashboard.slug = this.dashboard.description =
+          "";
       });
     }
   }

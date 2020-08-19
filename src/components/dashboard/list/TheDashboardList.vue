@@ -19,18 +19,22 @@ export default {
     DashboardItem
   },
   mounted() {
-    axios
-      .get(process.env.VUE_APP_BASE_URL + "/api/dashboards")
-      .then(
-        response =>
-          (this.dashboards = response.data._embedded.dashboardResourceList)
-      )
-      .catch(error => console.log(error));
+    this.getDashboards();
   },
   data() {
     return {
       dashboards: []
     };
+  },
+  methods: {
+    getDashboards() {
+      axios
+        .get(process.env.VUE_APP_BASE_URL + "/api/dashboards")
+        .then(response => {
+          this.dashboards = response.data._embedded.dashboardResourceList;
+        })
+        .catch(error => console.log(error));
+    }
   }
 };
 </script>

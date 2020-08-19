@@ -7,10 +7,15 @@
 </template>
 <script>
 import TheHeader from "@/components/header/TheHeader";
-import TheFooter from "@/footer/TheFooter";
+import TheFooter from "@/components/footer/TheFooter";
 
 export default {
-  components: { TheFooter, TheHeader }
+  components: { TheFooter, TheHeader },
+  mixins: {
+    getValidationState({ dirty, validated, valid = null }) {
+      return dirty || validated ? valid : null;
+    }
+  }
 };
 </script>
 

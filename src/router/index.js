@@ -7,7 +7,7 @@ import TheLogin from "@/components/header/TheLogin";
 Vue.use(VueRouter);
 
 const routes = [
-  { path: "/home", component: TheDashboardList },
+  { path: "/", component: TheDashboardList },
   { path: "/dashboard/:slug", component: EditDashboardItem },
   { path: "/login", component: TheLogin }
 ];
