@@ -1,7 +1,7 @@
 <template>
-  <b-navbar type="dark" variant="dark" fixed="bottom">
+  <b-navbar variant="dark" type="dark" fixed="bottom">
     <b-navbar-nav class="mx-auto">
-      <b-nav-item href="https://github.com/ccaylak/infinimanager"
+      <b-nav-item target="_blank" :href="github"
         >© InfiniManager - GitHub</b-nav-item
       >
     </b-navbar-nav>
@@ -10,6 +10,11 @@
 
 <script>
 export default {
-  name: "TheFooter"
+  name: "TheFooter",
+  data() {
+    return {
+      github: "https://github.com/ccaylak/infinimanager"
+    };
+  }
 };
 </script>

@@ -5,12 +5,12 @@
       <span class="h4">Add widget</span>
     </b-button>
     <!-- Add widget modal window -->
-    <b-modal id="add-widget" centered title="Add widget divider" hide-footer>
+    <b-modal id="add-widget" title="Add widget divider" centered hide-footer>
       <b-form @submit.prevent="onSubmit">
         <!-- Widget name input -->
-        <b-form-group label="Widget name" label-for="widget-name-input">
+        <b-form-group label="Widget name" label-for="widget-name">
           <b-form-input
-            id="widget-name-input"
+            id="widget-name"
             v-model="widget.title"
             type="text"
             required

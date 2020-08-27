@@ -16,9 +16,9 @@
                   v-model="login.email"
                   type="email"
                   :state="getValidationState(validationContext)"
-                  aria-describedby="e-invalid"
+                  aria-describedby="email-required"
                 ></b-form-input>
-                <b-form-invalid-feedback id="e-invalid">{{
+                <b-form-invalid-feedback id="email-required">{{
                   validationContext.errors[0]
                 }}</b-form-invalid-feedback>
               </ValidationProvider>
@@ -34,9 +34,9 @@
                   v-model="login.password"
                   type="password"
                   :state="getValidationState(validationContext)"
-                  aria-describedby="p-invalid"
+                  aria-describedby="password-required"
                 ></b-form-input>
-                <b-form-invalid-feedback id="p-invalid">{{
+                <b-form-invalid-feedback id="password-required">{{
                   validationContext.errors[0]
                 }}</b-form-invalid-feedback>
               </ValidationProvider>

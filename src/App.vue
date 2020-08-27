@@ -10,12 +10,7 @@ import TheHeader from "@/components/header/TheHeader";
 import TheFooter from "@/components/footer/TheFooter";
 
 export default {
-  components: { TheFooter, TheHeader },
-  mixins: {
-    getValidationState({ dirty, validated, valid = null }) {
-      return dirty || validated ? valid : null;
-    }
-  }
+  components: { TheFooter, TheHeader }
 };
 </script>
 

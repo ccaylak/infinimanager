@@ -4,21 +4,20 @@
     <b-button @click="$bvModal.show(title)">
       <b-icon-trash font-scale="2"></b-icon-trash>
     </b-button>
-    <b-modal v-bind:id="title" hide-footer title="Delete divider widget">
+    <b-modal :id="title" title="Delete divider widget" hide-footer>
       <!-- Delete divider widget modal windows -->
       <div class="d-block text-center">
         <h3>Do you really want to {{ title }}?</h3>
       </div>
       <!-- Delete divider widget yes button -->
-      <b-button class="mt-3" block @click="onClick">Yes</b-button>
+      <b-button class="mt-3" @click="onClick" block>Yes</b-button>
       <!-- Delete divider widget no button -->
-      <b-button class="mt-3" block @click="$bvModal.hide(title)">No</b-button>
+      <b-button class="mt-3" @click="$bvModal.hide(title)" block>No</b-button>
     </b-modal>
   </div>
 </template>
 
 <script>
-import axios from "axios";
 export default {
   name: "DeleteButtonDividerWidget",
   props: {
@@ -31,7 +30,7 @@ export default {
     };
   },
   mounted() {
-    axios
+    this.$http
       .get(
         process.env.VUE_APP_BASE_URL +
           "/api/dashboards/" +

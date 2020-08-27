@@ -1,12 +1,6 @@
 <template>
   <b-container>
     <b-row>
-      <!--
-      <h1 class="font-weight-bolder">
-        No dashboards available
-        <p>Go on create some</p>
-      </h1>
-      -->
       <b-container>
         <b-row class="p-3 border-bottom border-left border-right">
           <b-col>

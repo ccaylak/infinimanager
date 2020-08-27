@@ -1,7 +1,7 @@
 <template>
   <b-container>
     <b-row>
-      <b-col align-self="center" class="text-center border-bottom">
+      <b-col class="text-center border-bottom" align-self="center">
         <!-- Back to dashboard list button -->
         <b-icon-arrow-left-short
           class="clickable"
@@ -41,7 +41,6 @@
 <script>
 import AddButtonDividerWidget from "@/components/dashboard/edit/AddButtonDividerWidget";
 import AddButtonWidget from "@/components/dashboard/edit/AddButtonWidget";
-import axios from "axios";
 import TheWidgetList from "@/components/dashboard/edit/widget/TheWidgetList";
 
 export default {
@@ -56,7 +55,7 @@ export default {
     };
   },
   mounted() {
-    axios
+    this.$http
       .get("http://localhost:8080/api/dashboards/" + this.$route.params.slug)
       .then(response => {
         this.dashboard.name = response.data.name;

@@ -1,33 +1,28 @@
 <template>
   <div>
     <!-- Add divider widget modal button -->
-    <b-button v-b-modal.add-divider-widget>
+    <b-button v-b-modal.add-divider>
       <span class="h4">Add widget divider</span>
     </b-button>
     <!-- Add divider widget modal window -->
-    <b-modal
-      id="add-divider-widget"
-      centered
-      title="Add widget divider"
-      hide-footer
-    >
+    <b-modal id="add-divider" title="Add divider" centered hide-footer>
       <ValidationObserver v-slot="{ handleSubmit }" ref="form">
         <b-form @submit.prevent="handleSubmit(onSubmit)">
           <!-- Divider name input -->
-          <b-form-group label="Title" label-for="dividerName">
+          <b-form-group label="Title" label-for="divider-title">
             <ValidationProvider
               name="Name"
               rules="required"
               v-slot="validationContext"
             >
               <b-form-input
-                id="dividerName"
-                v-model="divider.title"
+                id="divider-title"
                 type="text"
+                v-model="divider.title"
                 :state="getValidationState(validationContext)"
-                aria-describedby="dividerName"
+                aria-describedby="title-required"
               ></b-form-input>
-              <b-form-invalid-feedback id="dividerName">
+              <b-form-invalid-feedback id="title-required">
                 {{ validationContext.errors[0] }}</b-form-invalid-feedback
               >
             </ValidationProvider>
@@ -35,16 +30,16 @@
           </b-form-group>
           <b-form-group
             label="Optional description"
-            label-for="divider-widget-description-input"
+            label-for="divider-description"
           >
             <b-form-input
-              id="divider-widget-name-input"
-              v-model="divider.description"
+              id="divider-description"
               type="text"
+              v-model="divider.description"
             ></b-form-input>
           </b-form-group>
           <!-- Divider widget submit button -->
-          <b-button class="mt-3" block type="submit"
+          <b-button class="mt-3" type="submit" block
             >Create widget divider
           </b-button>
         </b-form>
@@ -54,7 +49,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   name: "AddButtonDividerWidget",
   data() {
@@ -76,7 +70,7 @@ export default {
           return 0;
         }
       });
-      axios
+      this.$http
         .post(
           process.env.VUE_APP_BASE_URL +
             "/dashboards/" +

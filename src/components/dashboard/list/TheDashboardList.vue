@@ -1,18 +1,22 @@
 <template>
-  <div>
+  <div v-if="dashboards.length > 0">
     <dashboard-item
-      class="listItem"
+      class="list-item"
       v-for="dashboard in dashboards"
       :key="dashboard.slug"
       :dashboard="dashboard"
     />
   </div>
+  <div v-else>
+    <h1 class="font-weight-bolder text-center">
+      No dashboards available
+    </h1>
+  </div>
 </template>
 
 <script>
-import axios from "axios";
 import DashboardItem from "@/components/dashboard/list/DashboardListItem";
-
+import axios from "axios";
 export default {
   name: "TheDashboardList",
   components: {
@@ -40,7 +44,7 @@ export default {
 </script>
 
 <style scoped>
-.listItem {
+.list-item {
   background-color: #8ec5fc;
   background-image: linear-gradient(62deg, #8ec5fc 0%, #e0c3fc 100%);
 }
