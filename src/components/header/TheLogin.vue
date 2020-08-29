@@ -64,9 +64,6 @@ export default {
   methods: {
     onSubmit() {
       alert(this.login.email);
-    },
-    getValidationState({ dirty, validated, valid = null }) {
-      return dirty || validated ? valid : null;
     }
   }
 };

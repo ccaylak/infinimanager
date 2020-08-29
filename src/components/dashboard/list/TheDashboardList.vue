@@ -1,7 +1,7 @@
 <template>
   <div v-if="dashboards.length > 0">
     <dashboard-item
-      class="list-item"
+      class="list-item mt-2"
       v-for="dashboard in dashboards"
       :key="dashboard.slug"
       :dashboard="dashboard"
@@ -16,7 +16,6 @@
 
 <script>
 import DashboardItem from "@/components/dashboard/list/DashboardListItem";
-import axios from "axios";
 export default {
   name: "TheDashboardList",
   components: {
@@ -32,12 +31,11 @@ export default {
   },
   methods: {
     getDashboards() {
-      axios
-        .get(process.env.VUE_APP_BASE_URL + "/api/dashboards")
+      this.$http
+        .get(`${process.env.VUE_APP_BASE_URL}/api/dashboards`)
         .then(response => {
           this.dashboards = response.data._embedded.dashboardResourceList;
-        })
-        .catch(error => console.log(error));
+        });
     }
   }
 };
@@ -45,7 +43,7 @@ export default {
 
 <style scoped>
 .list-item {
-  background-color: #8ec5fc;
-  background-image: linear-gradient(62deg, #8ec5fc 0%, #e0c3fc 100%);
+  background-color: #0072ff;
+  color: white;
 }
 </style>

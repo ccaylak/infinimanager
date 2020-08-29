@@ -26,8 +26,12 @@
                 <add-button-divider-widget></add-button-divider-widget>
               </b-col>
               <b-col>
-                <!-- Add widget button -->
-                <add-button-widget></add-button-widget>
+                <!-- Add jenkins widget button -->
+                <add-button-jenkins-widget></add-button-jenkins-widget>
+              </b-col>
+              <b-col>
+                <!-- Add platform version widget button -->
+                <add-button-platform-version-widget></add-button-platform-version-widget>
               </b-col>
             </b-row>
           </b-col>
@@ -39,13 +43,19 @@
 </template>
 
 <script>
-import AddButtonDividerWidget from "@/components/dashboard/edit/AddButtonDividerWidget";
-import AddButtonWidget from "@/components/dashboard/edit/AddButtonWidget";
 import TheWidgetList from "@/components/dashboard/edit/widget/TheWidgetList";
+import AddButtonDividerWidget from "@/components/dashboard/edit/AddButtonDividerWidget";
+import AddButtonJenkinsWidget from "@/components/dashboard/edit/AddButtonJenkinsWidget";
+import AddButtonPlatformVersionWidget from "@/components/dashboard/edit/AddButtonPlatformVersionWidget";
 
 export default {
   name: "EditDashboardItem",
-  components: { TheWidgetList, AddButtonDividerWidget, AddButtonWidget },
+  components: {
+    TheWidgetList,
+    AddButtonPlatformVersionWidget,
+    AddButtonJenkinsWidget,
+    AddButtonDividerWidget
+  },
   data() {
     return {
       dashboard: {
@@ -56,7 +66,9 @@ export default {
   },
   mounted() {
     this.$http
-      .get("http://localhost:8080/api/dashboards/" + this.$route.params.slug)
+      .get(
+        `${process.env.VUE_APP_BASE_URL}/api/dashboards/${this.$route.params.slug}`
+      )
       .then(response => {
         this.dashboard.name = response.data.name;
         this.dashboard.description = response.data.description;

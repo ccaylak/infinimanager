@@ -28,6 +28,14 @@ Vue.component("ValidationProvider", ValidationProvider);
 
 Vue.config.productionTip = false;
 
+Vue.mixin({
+  methods: {
+    getValidationState({ dirty, validated, valid = null }) {
+      return dirty || validated ? valid : null;
+    }
+  }
+});
+
 new Vue({
   router,
   render: h => h(App)

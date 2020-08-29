@@ -10,15 +10,12 @@
                 <!-- Divider widget name -->
                 {{ title }}
                 <!-- Divider widget description -->
-                <span class="font-weight-lighter">- {{ description }}</span>
+                <span v-if="description" class="font-weight-lighter">- {{ description }}</span>
               </u>
             </div>
           </b-col>
           <b-col sm="0.5">
-            <delete-button-divider-widget
-              :title="title"
-              :widget-id="widgetId"
-            ></delete-button-divider-widget>
+            <delete-button-divider-widget></delete-button-divider-widget>
           </b-col>
         </b-row>
       </b-container>
@@ -35,8 +32,7 @@ export default {
   components: { DeleteButtonDividerWidget },
   props: {
     title: String,
-    description: String,
-    widgetId: String
+    description: String
   }
 };
 </script>

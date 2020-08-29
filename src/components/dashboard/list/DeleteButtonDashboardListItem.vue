@@ -19,8 +19,6 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   name: "DeleteButtonDashboardListItem",
   props: {
@@ -29,8 +27,8 @@ export default {
   },
   methods: {
     onDelete() {
-      axios
-        .delete(process.env.VUE_APP_BASE_URL + "/api/dashboards/" + this.slug)
+      this.$http
+        .delete(`${process.env.VUE_APP_BASE_URL}/api/dashboards/${this.slug}`)
         .then(() => {
           this.$bvModal.hide(this.slug);
         });

@@ -1,21 +1,25 @@
 <template>
   <div>
-    <divider-widget
-      v-for="widget in widgets"
-      :key="widget._id"
-      :title="widget.title"
-      :description="widget.description"
-      :widget-id="widget._id"
-    ></divider-widget>
-    <jenkins-widget></jenkins-widget>
+    <div v-for="widget in widgets" :key="widget._id">
+      <div v-if="widget.type === 'divider'">
+        <divider-widget
+          :title="widget.title"
+          :description="widget.description"
+        ></divider-widget>
+      </div>
+      <div v-if="widget.type === 'jenkins'">
+        <jenkins-widget
+          :title="widget.title"
+          :url="widget.sourceConfigs[0].configData.url"
+        ></jenkins-widget>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import DividerWidget from "@/components/dashboard/edit/widget/DividerWidget";
-import axios from "axios";
 import JenkinsWidget from "@/components/dashboard/edit/widget/JenkinsWidget";
-
 export default {
   name: "TheWidgetList",
   components: { JenkinsWidget, DividerWidget },
@@ -25,11 +29,9 @@ export default {
     };
   },
   mounted() {
-    axios
+    this.$http
       .get(
-        "http://localhost:8080//api/dashboards/" +
-          this.$route.params.slug +
-          "/widgets/all"
+        `${process.env.VUE_APP_BASE_URL}/api/dashboards/${this.$route.params.slug}/widgets/all`
       )
       .then(response => {
         this.widgets = response.data._embedded.widgetConfigResourceList;

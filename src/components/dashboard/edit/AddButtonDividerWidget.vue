@@ -9,14 +9,20 @@
       <ValidationObserver v-slot="{ handleSubmit }" ref="form">
         <b-form @submit.prevent="handleSubmit(onSubmit)">
           <!-- Divider name input -->
-          <b-form-group label="Title" label-for="divider-title">
-            <ValidationProvider
-              name="Name"
-              rules="required"
-              v-slot="validationContext"
-            >
+          <ValidationProvider
+            name="Name"
+            rules="required"
+            v-slot="validationContext"
+          >
+            <b-input-group>
+              <b-input-group-prepend>
+                <span class="input-group-text"
+                  ><b-icon-tag-fill></b-icon-tag-fill
+                ></span>
+              </b-input-group-prepend>
               <b-form-input
                 id="divider-title"
+                placeholder="Divider widget title"
                 type="text"
                 v-model="divider.title"
                 :state="getValidationState(validationContext)"
@@ -25,19 +31,20 @@
               <b-form-invalid-feedback id="title-required">
                 {{ validationContext.errors[0] }}</b-form-invalid-feedback
               >
-            </ValidationProvider>
-            <!-- Divider widget description input -->
-          </b-form-group>
-          <b-form-group
-            label="Optional description"
-            label-for="divider-description"
-          >
+            </b-input-group>
+          </ValidationProvider>
+          <!-- Divider widget description input -->
+          <b-input-group class="mt-3">
+            <b-input-group-prepend>
+              <span class="input-group-text"><b-icon-info></b-icon-info></span>
+            </b-input-group-prepend>
             <b-form-input
               id="divider-description"
+              placeholder="Optional divider widget description"
               type="text"
               v-model="divider.description"
-            ></b-form-input>
-          </b-form-group>
+            ></b-form-input
+          ></b-input-group>
           <!-- Divider widget submit button -->
           <b-button class="mt-3" type="submit" block
             >Create widget divider
@@ -55,15 +62,11 @@ export default {
     return {
       divider: {
         title: "",
-        description: "",
-        type: "divider"
+        description: ""
       }
     };
   },
   methods: {
-    getValidationState({ dirty, validated, valid = null }) {
-      return dirty || validated ? valid : null;
-    },
     onSubmit() {
       this.$refs.form.validate().then(success => {
         if (!success) {
@@ -72,14 +75,11 @@ export default {
       });
       this.$http
         .post(
-          process.env.VUE_APP_BASE_URL +
-            "/dashboards/" +
-            this.$route.params.slug +
-            "/widgets",
+          `${process.env.VUE_APP_BASE_URL}/api/dashboards/${this.$route.params.slug}/widgets`,
           {
             title: this.divider.title,
             description: this.divider.description,
-            type: this.divider.type
+            type: "divider"
           }
         )
         .then(function(response) {
@@ -88,7 +88,7 @@ export default {
       this.divider.title = this.divider.description = "";
       this.$nextTick(() => {
         this.$refs.form.reset();
-        this.$bvModal.hide("add-divider-widget");
+        this.$bvModal.hide("add-divider");
       });
     }
   }

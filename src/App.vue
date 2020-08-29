@@ -18,12 +18,7 @@ export default {
 .clickable {
   cursor: pointer;
 }
-.background {
-  background-color: #2f4353;
-  background-image: linear-gradient(315deg, #2f4353 0%, #d2ccc4 74%);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
+
 .headerOverlap {
   padding-top: 56px;
 }

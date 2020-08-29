@@ -7,14 +7,19 @@
       <ValidationObserver v-slot="{ handleSubmit }" ref="form">
         <b-form @submit.prevent="handleSubmit(onSubmit)">
           <!-- Dashboard name input -->
-          <b-form-group label="Name" label-for="dashboard-name">
-            <ValidationProvider
-              name="Name"
-              rules="required"
-              v-slot="validationContext"
-            >
+          <ValidationProvider
+            name="Name"
+            rules="required"
+            v-slot="validationContext"
+            ><b-input-group>
+              <b-input-group-prepend>
+                <span class="input-group-text"
+                  ><b-icon-tag-fill></b-icon-tag-fill
+                ></span>
+              </b-input-group-prepend>
               <b-form-input
                 id="dashboard-name"
+                placeholder="Dashboard title"
                 v-model="dashboard.name"
                 type="text"
                 :state="getValidationState(validationContext)"
@@ -23,18 +28,23 @@
               <b-form-invalid-feedback id="required-name"
                 >{{ validationContext.errors[0] }}
               </b-form-invalid-feedback>
-              <span></span>
-            </ValidationProvider>
-          </b-form-group>
+            </b-input-group>
+          </ValidationProvider>
           <!-- Dashboard slug input -->
-          <b-form-group label="Slug" label-for="dashboard-slug">
-            <ValidationProvider
-              name="Slug"
-              :rules="{ required: true, regex: /^[a-z0-9-_]+$/ }"
-              v-slot="validationContext"
-            >
+          <ValidationProvider
+            name="Slug"
+            :rules="{ required: true, regex: /^[a-z0-9-_]+$/ }"
+            v-slot="validationContext"
+          >
+            <b-input-group class="mt-3">
+              <b-input-group-prepend>
+                <span class="input-group-text"
+                  ><b-icon-flag-fill></b-icon-flag-fill
+                ></span>
+              </b-input-group-prepend>
               <b-form-input
                 id="dashboard-slug"
+                placeholder="Dashboard slug"
                 v-model="dashboard.slug"
                 type="text"
                 :state="getValidationState(validationContext)"
@@ -43,18 +53,24 @@
               <b-form-invalid-feedback id="slug-required"
                 >{{ validationContext.errors[0] }}
               </b-form-invalid-feedback>
-            </ValidationProvider>
-          </b-form-group>
+            </b-input-group>
+          </ValidationProvider>
           <!-- Dashboard description input -->
-          <b-form-group label="Description" label-for="dashboard-description">
-            <ValidationProvider name="Description">
+          <ValidationProvider name="Description">
+            <b-input-group class="mt-3">
+              <b-input-group-prepend>
+                <span class="input-group-text"
+                  ><b-icon-info></b-icon-info
+                ></span>
+              </b-input-group-prepend>
               <b-form-input
                 id="dashboard-description"
+                placeholder="Optional dashboard description"
                 v-model="dashboard.description"
                 type="text"
               ></b-form-input>
-            </ValidationProvider>
-          </b-form-group>
+            </b-input-group>
+          </ValidationProvider>
           <!-- Dashboard submit button -->
           <b-button class="mt-3" block type="submit">Create dashboard</b-button>
         </b-form>
@@ -64,8 +80,6 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   name: "AddNavItemDashboard",
   data() {
@@ -78,30 +92,24 @@ export default {
     };
   },
   methods: {
-    getValidationState({ dirty, validated, valid = null }) {
-      return dirty || validated ? valid : null;
-    },
     onSubmit() {
       this.$refs.form.validate().then(success => {
         if (!success) {
           return 0;
         }
       });
-      axios
-        .post(process.env.VUE_APP_BASE_URL + "/api/dashboards", {
+      this.$http
+        .post(`${process.env.VUE_APP_BASE_URL}/api/dashboards`, {
           name: this.dashboard.name,
           slug: this.dashboard.slug,
           description: this.dashboard.description
         })
-        .then(function(response) {
+        .then(response => {
           console.log(response);
-        })
-        .catch(function(error) {
-          console.log(error);
         });
       this.$nextTick(() => {
         this.$refs.form.reset();
-        this.$bvModal.hide("modal-center");
+        this.$bvModal.hide("add-dashboard");
         this.dashboard.name = this.dashboard.slug = this.dashboard.description =
           "";
       });
