@@ -22,7 +22,7 @@
               </b-input-group-prepend>
               <b-form-input
                 id="divider-title"
-                placeholder="Divider widget title"
+                placeholder="Title"
                 type="text"
                 v-model="divider.title"
                 :state="getValidationState(validationContext)"
@@ -40,7 +40,7 @@
             </b-input-group-prepend>
             <b-form-input
               id="divider-description"
-              placeholder="Optional divider widget description"
+              placeholder="Optional description"
               type="text"
               v-model="divider.description"
             ></b-form-input

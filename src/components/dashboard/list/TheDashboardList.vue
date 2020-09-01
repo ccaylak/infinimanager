@@ -1,7 +1,7 @@
 <template>
   <div v-if="dashboards.length > 0">
     <dashboard-item
-      class="list-item mt-2"
+      class="list-item mt-2 shadow-sm"
       v-for="dashboard in dashboards"
       :key="dashboard.slug"
       :dashboard="dashboard"

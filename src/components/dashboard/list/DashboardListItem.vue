@@ -2,7 +2,7 @@
   <b-container>
     <b-row>
       <b-container>
-        <b-row class="p-3 border-bottom border-left border-right">
+        <b-row class="border-bottom border-left border-right">
           <b-col>
             <!-- Dashboard name -->
             <div class="h1 font-weight-bolder">

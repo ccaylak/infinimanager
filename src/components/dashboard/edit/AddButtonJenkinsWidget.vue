@@ -21,7 +21,7 @@
               </b-input-group-prepend>
               <b-form-input
                 id="jenkins-title"
-                placeholder="Divider widget title"
+                placeholder="Title"
                 type="text"
                 v-model="jenkins.title"
                 :state="getValidationState(validationContext)"
@@ -46,7 +46,7 @@
               </b-input-group-prepend>
               <b-form-input
                 id="jenkins-url"
-                placeholder="Jenkins url"
+                placeholder="URL"
                 type="text"
                 v-model="jenkins.sourceConfigs.configData.url"
                 :state="getValidationState(validationContext)"
@@ -123,6 +123,12 @@
               </b-form-invalid-feedback>
             </b-input-group>
           </ValidationProvider>
+          <b-form-group class="text-center" label="SSL Verification?">
+            <b-form-radio-group v-model="selected" name="some-radios">
+              <b-form-radio value="yes">Yes</b-form-radio>
+              <b-form-radio value="no">No</b-form-radio>
+            </b-form-radio-group>
+          </b-form-group>
           <b-button class="mt-3" type="submit" block
             >Create jenkins widget
           </b-button>
@@ -137,10 +143,11 @@ export default {
   name: "AddButtonJenkinsWidget",
   data() {
     return {
+      selected: "no",
       jenkins: {
         title: "",
         sourceConfigs: {
-          interval: 1,
+          interval: null,
           configData: {
             url: "",
             username: "",
@@ -170,7 +177,7 @@ export default {
                 interval: this.jenkins.sourceConfigs.interval * 1000,
                 configData: {
                   url: this.jenkins.sourceConfigs.configData.url,
-                  enableSslVerification: false,
+                  enableSslVerification: !this.selected,
                   username: this.jenkins.sourceConfigs.configData.username,
                   password: this.jenkins.sourceConfigs.configData.password
                 }

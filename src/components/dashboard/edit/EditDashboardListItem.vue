@@ -10,7 +10,7 @@
         ></b-icon-arrow-left-short>
       </b-col>
       <b-container>
-        <b-row class="p-4 border-bottom">
+        <b-row class="border-bottom">
           <b-col>
             <!-- Dashboard name -->
             <div class="h1 font-weight-bolder">
@@ -20,7 +20,7 @@
             <div class="font-weight-lighter">
               {{ dashboard.description }}
             </div>
-            <b-row class="pt-5">
+            <b-row class="pt-3 pb-3">
               <b-col>
                 <!-- Add widget divider button -->
                 <add-button-divider-widget></add-button-divider-widget>

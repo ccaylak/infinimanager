@@ -1,13 +1,13 @@
 <template>
   <b-card
     border-variant="secondary"
-    v-bind:header="title"
+    :header="title.toUpperCase()"
     header-border-variant="secondary"
     align="center"
   >
     <b-row>
       <b-col>
-        <b-card-title>Title</b-card-title>
+        <b-card-title>{{ description }}</b-card-title>
       </b-col>
       <b-col>
         <b-button>
@@ -20,10 +20,10 @@
 
 <script>
 export default {
-  name: "JenkinsWidget",
+  name: "PlatformversionWidget",
   props: {
     title: String,
-    url: String
+    description: String
   }
 };
 </script>

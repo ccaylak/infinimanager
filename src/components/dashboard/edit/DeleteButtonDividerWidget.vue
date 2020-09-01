@@ -10,7 +10,7 @@
         <h3>Do you really want to {{ title }}?</h3>
       </div>
       <!-- Delete divider widget yes button -->
-      <b-button class="mt-3" block>Yes</b-button>
+      <b-button class="mt-3" @click="onDelete" block>Yes</b-button>
       <!-- Delete divider widget no button -->
       <b-button class="mt-3" @click="$bvModal.hide(title)" block>No</b-button>
     </b-modal>
@@ -22,19 +22,18 @@ export default {
   name: "DeleteButtonDividerWidget",
   props: {
     title: String,
-    widgetId: String
+    id: String
   },
-  data() {
-    return {
-      deleteURL: String
-    };
-  },
-  mounted() {
-    this.$http
-      .get(
-        `${process.env.VUE_APP_BASE_URL}/api/dashboards/${this.$route.params.slug}/widgets`
-      )
-      .then(() => {});
+  methods: {
+    onDelete() {
+      this.$http
+        .delete(
+          `${process.env.VUE_APP_BASE_URL}/api/dashboards/${this.$route.params.slug}/widgets/${this.id}`
+        )
+        .then(() => {
+          this.$bvModal.hide(this.title);
+        });
+    }
   }
 };
 </script>

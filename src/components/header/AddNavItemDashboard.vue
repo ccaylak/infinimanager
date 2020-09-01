@@ -3,7 +3,13 @@
     <!-- Add dashboard modal button -->
     <b-nav-item v-b-modal.add-dashboard>Add dashboard</b-nav-item>
     <!-- Add dashboard modal window -->
-    <b-modal id="add-dashboard" title="Add dashboard" centered hide-footer>
+    <b-modal
+      id="add-dashboard"
+      title="Add dashboard"
+      size="sm"
+      centered
+      hide-footer
+    >
       <ValidationObserver v-slot="{ handleSubmit }" ref="form">
         <b-form @submit.prevent="handleSubmit(onSubmit)">
           <!-- Dashboard name input -->
@@ -19,7 +25,7 @@
               </b-input-group-prepend>
               <b-form-input
                 id="dashboard-name"
-                placeholder="Dashboard title"
+                placeholder="Title"
                 v-model="dashboard.name"
                 type="text"
                 :state="getValidationState(validationContext)"
@@ -44,7 +50,7 @@
               </b-input-group-prepend>
               <b-form-input
                 id="dashboard-slug"
-                placeholder="Dashboard slug"
+                placeholder="Slug"
                 v-model="dashboard.slug"
                 type="text"
                 :state="getValidationState(validationContext)"
@@ -65,7 +71,7 @@
               </b-input-group-prepend>
               <b-form-input
                 id="dashboard-description"
-                placeholder="Optional dashboard description"
+                placeholder="Optional description"
                 v-model="dashboard.description"
                 type="text"
               ></b-form-input>
