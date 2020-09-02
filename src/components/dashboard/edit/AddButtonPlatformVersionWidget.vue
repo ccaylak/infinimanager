@@ -183,7 +183,7 @@
             </b-form-radio-group>
           </b-form-group>
           <b-button class="mt-3" type="submit" block
-          >Create platform version widget
+            >Create platform version widget
           </b-button>
         </b-form>
       </ValidationObserver>
