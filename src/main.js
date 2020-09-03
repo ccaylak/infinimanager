@@ -8,16 +8,8 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 import { ValidationObserver, ValidationProvider, extend } from "vee-validate";
 import { required, regex, email } from "vee-validate/dist/rules";
 
-extend("required", {
-  ...required,
-  message: "This field is required"
-});
-
-extend("regex", {
-  ...regex,
-  message: "This field is not valid"
-});
-
+extend("required", required);
+extend("regex", regex);
 extend("email", email);
 
 Vue.use(BootstrapVue);

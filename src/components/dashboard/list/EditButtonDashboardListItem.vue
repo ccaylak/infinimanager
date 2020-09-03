@@ -1,5 +1,5 @@
 <template>
-  <b-button class="m-2" @click="editDashboard">
+  <b-button class="m-2" variant="outline-light" @click="editDashboard">
     <b-icon-pencil-square font-scale="1.5"></b-icon-pencil-square>
   </b-button>
 </template>

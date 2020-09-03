@@ -1,13 +1,14 @@
 <template>
   <div>
-    <!-- Add jenkins widget modal button -->
-    <b-button v-b-modal.add-jenkins>
+    <!-- Add jenkins widget button -->
+    <b-button variant="outline-light" v-b-modal.add-jenkins block>
       <span class="h4">Add jenkins widget</span>
     </b-button>
-    <!-- Add jenkins widget modal window -->
+    <!-- Jenkins widget modal -->
     <b-modal id="add-jenkins" title="Add jenkins widget" centered hide-footer>
       <ValidationObserver v-slot="{ handleSubmit }" ref="form">
         <b-form @submit.prevent="handleSubmit(onSubmit)">
+          <!-- Title input -->
           <ValidationProvider
             name="Title"
             rules="required"
@@ -33,6 +34,7 @@
               </b-form-invalid-feedback>
             </b-input-group>
           </ValidationProvider>
+          <!-- URL input -->
           <ValidationProvider
             name="Url"
             rules="required"
@@ -58,6 +60,7 @@
               </b-form-invalid-feedback>
             </b-input-group>
           </ValidationProvider>
+          <!-- Interval spinbutton -->
           <b-input-group class="mt-3">
             <b-input-group-prepend>
               <span class="input-group-text"
@@ -73,6 +76,7 @@
             >
             </b-form-spinbutton>
           </b-input-group>
+          <!-- Username input -->
           <ValidationProvider
             name="Username"
             rules="required"
@@ -98,6 +102,7 @@
               </b-form-invalid-feedback>
             </b-input-group>
           </ValidationProvider>
+          <!-- Password input -->
           <ValidationProvider
             name="Password"
             rules="required"
@@ -123,12 +128,14 @@
               </b-form-invalid-feedback>
             </b-input-group>
           </ValidationProvider>
+          <!-- Ssl verification radiobutton -->
           <b-form-group class="text-center" label="SSL Verification?">
             <b-form-radio-group v-model="selected" name="some-radios">
               <b-form-radio value="yes">Yes</b-form-radio>
               <b-form-radio value="no">No</b-form-radio>
             </b-form-radio-group>
           </b-form-group>
+          <!-- Submit button -->
           <b-button class="mt-3" type="submit" block
             >Create jenkins widget
           </b-button>

@@ -7,23 +7,27 @@
   >
     <b-row>
       <b-col>
+        <!-- Description -->
         <b-card-title>{{ description }}</b-card-title>
       </b-col>
       <b-col>
-        <b-button>
-          <b-icon-trash-fill></b-icon-trash-fill>
-        </b-button>
+        <!-- Delete button -->
+        <delete-button-widget :title="title" :id="widgetId">
+        </delete-button-widget>
       </b-col>
     </b-row>
   </b-card>
 </template>
 
 <script>
+import DeleteButtonWidget from "@/components/dashboard/edit/DeleteButtonWidget";
 export default {
-  name: "PlatformversionWidget",
+  name: "PlatformWidget",
+  components: { DeleteButtonWidget },
   props: {
     title: String,
-    description: String
+    description: String,
+    widgetId: String
   }
 };
 </script>

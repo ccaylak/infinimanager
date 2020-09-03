@@ -1,16 +1,17 @@
 <template>
   <b-container>
     <b-row>
-      <b-col class="text-center border-bottom" align-self="center">
+      <b-col class="text-center pt-4 pb-4">
         <!-- Back to dashboard list button -->
-        <b-icon-arrow-left-short
+        <b-icon-arrow-left-circle-fill
           class="clickable"
+          variant="secondary"
+          font-scale="2.5"
           @click="toRoot"
-          font-scale="4"
-        ></b-icon-arrow-left-short>
+        ></b-icon-arrow-left-circle-fill>
       </b-col>
       <b-container>
-        <b-row class="border-bottom">
+        <b-row class="list-item shadow-lg">
           <b-col>
             <!-- Dashboard name -->
             <div class="h1 font-weight-bolder">
@@ -31,7 +32,7 @@
               </b-col>
               <b-col>
                 <!-- Add platform version widget button -->
-                <add-button-platform-version-widget></add-button-platform-version-widget>
+                <add-button-platform-widget></add-button-platform-widget>
               </b-col>
             </b-row>
           </b-col>
@@ -46,13 +47,13 @@
 import TheWidgetList from "@/components/dashboard/edit/widget/TheWidgetList";
 import AddButtonDividerWidget from "@/components/dashboard/edit/AddButtonDividerWidget";
 import AddButtonJenkinsWidget from "@/components/dashboard/edit/AddButtonJenkinsWidget";
-import AddButtonPlatformVersionWidget from "@/components/dashboard/edit/AddButtonPlatformVersionWidget";
+import AddButtonPlatformWidget from "@/components/dashboard/edit/AddButtonPlatformWidget";
 
 export default {
   name: "EditDashboardItem",
   components: {
     TheWidgetList,
-    AddButtonPlatformVersionWidget,
+    AddButtonPlatformWidget,
     AddButtonJenkinsWidget,
     AddButtonDividerWidget
   },

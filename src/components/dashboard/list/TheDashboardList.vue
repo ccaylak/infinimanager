@@ -1,7 +1,7 @@
 <template>
   <div v-if="dashboards.length > 0">
     <dashboard-item
-      class="list-item mt-2 shadow-sm"
+      class="list-item mt-2 shadow-lg"
       v-for="dashboard in dashboards"
       :key="dashboard.slug"
       :dashboard="dashboard"
@@ -41,9 +41,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .list-item {
-  background-color: #0072ff;
+  background: #0071b9;
   color: white;
 }
 </style>

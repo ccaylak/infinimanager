@@ -25,4 +25,9 @@ export default {
 .footerOverlap {
   padding-bottom: 56px;
 }
+.background {
+  background: linear-gradient(to top, #f3f3f3, white) center center fixed
+    no-repeat;
+  background-size: cover;
+}
 </style>

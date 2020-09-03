@@ -1,5 +1,5 @@
 <template>
-  <b-navbar variant="dark" type="dark" fixed="bottom">
+  <b-navbar class="footer" type="dark" fixed="bottom">
     <b-navbar-nav class="mx-auto">
       <b-nav-item target="_blank" :href="github"
         >© InfiniManager - GitHub</b-nav-item
@@ -18,3 +18,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.footer {
+  background: #8c8c8c;
+}
+</style>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Header title -->
-    <b-navbar class="navbar" type="dark" fixed="top" toggleable="md">
+    <b-navbar class="navbar" type="light" fixed="top" toggleable="md">
       <b-navbar-brand class="mb-0 clickable" tag="h1" @click="toHome"
         >InfiniManager</b-navbar-brand
       >
@@ -45,6 +45,6 @@ export default {
 
 <style scoped>
 .navbar {
-  background: linear-gradient(to right, #00c6ff, #0072ff);
+  background-color: #e6e6e6;
 }
 </style>

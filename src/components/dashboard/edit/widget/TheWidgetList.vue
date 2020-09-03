@@ -5,14 +5,14 @@
         <divider-widget
           :title="uwidget.title"
           :description="uwidget.description"
-          :id="uwidget.widgetId"
+          :widget-id="uwidget.widgetId"
         ></divider-widget>
       </template>
 
-      <template v-if="!(uwidget.type === 'divider')">
+      <template v-if="uwidget.type === 'divider'">
         <b-card-group columns>
           <div
-            v-for="widget in splitWidgets(widgets, index)"
+            v-for="widget in splitWidgets(widgets.slice(index + 1))"
             :key="widget._id"
           >
             <div v-if="!(widget.type === 'divider')">
@@ -20,11 +20,13 @@
                 v-if="widget.type === 'jenkins'"
                 :title="widget.title"
                 :url="widget.sourceConfigs[0].configData.url"
+                :widget-id="widget.widgetId"
               ></jenkins-widget>
               <platformversion-widget
                 v-if="widget.type === 'platform-status'"
                 :title="widget.title"
                 :description="widget.description"
+                :widget-id="widget.widgetId"
               ></platformversion-widget>
             </div>
           </div>
@@ -37,7 +39,7 @@
 <script>
 import DividerWidget from "@/components/dashboard/edit/widget/DividerWidget";
 import JenkinsWidget from "@/components/dashboard/edit/widget/JenkinsWidget";
-import PlatformversionWidget from "@/components/dashboard/edit/widget/PlatformversionWidget";
+import PlatformversionWidget from "@/components/dashboard/edit/widget/PlatformWidget";
 export default {
   name: "TheWidgetList",
   components: { PlatformversionWidget, JenkinsWidget, DividerWidget },
@@ -47,12 +49,14 @@ export default {
     };
   },
   methods: {
-    splitWidgets(list, index) {
+    // @Copyright2020 Frederik Schlemmer
+    splitWidgets(list) {
       for (let i = 0; i < list.length; i++) {
-        console.log("Length: " + list.length);
-        console.log("Type: " + list[i].type);
         if (list[i].type === "divider") {
-          return list.slice(index, i);
+          return list.slice(0, i);
+        }
+        if (i === list.length - 1) {
+          return list;
         }
       }
     }

@@ -1,19 +1,14 @@
 <template>
   <div>
-    <!-- Add platform version widget button -->
-    <b-button v-b-modal:add-platformversion>
-      <span class="h4">Add platform version widget</span>
+    <!-- Add platform widget button -->
+    <b-button variant="outline-light" v-b-modal:add-platform block>
+      <span class="h4">Add platform widget</span>
     </b-button>
-    <!-- Add platform version widget modal windows -->
-    <b-modal
-      id="add-platformversion"
-      title="Add platform version widget"
-      centered
-      hide-footer
-    >
+    <!-- Platform widget modal -->
+    <b-modal id="add-platform" title="Add platform widget" centered hide-footer>
       <ValidationObserver v-slot="{ handleSubmit }" ref="form">
         <b-form @submit.prevent="handleSubmit(onSubmit)">
-          <!-- Platform version title -->
+          <!-- Platform title -->
           <ValidationProvider
             name="Title"
             rules="required"
@@ -26,10 +21,10 @@
                 ></span>
               </b-input-group-prepend>
               <b-form-input
-                id="platformversion-title"
+                id="platform-title"
                 placeholder="Title"
                 type="text"
-                v-model="platformversion.title"
+                v-model="platform.title"
                 :state="getValidationState(validationContext)"
                 aria-describedby="title-required"
               ></b-form-input>
@@ -38,6 +33,7 @@
               >
             </b-input-group>
           </ValidationProvider>
+          <!-- Platform url -->
           <ValidationProvider
             name="Title url"
             rules="required"
@@ -50,18 +46,19 @@
                 ></span>
               </b-input-group-prepend>
               <b-form-input
-                id="platformversion-titleurl"
+                id="platform-url"
                 placeholder="Platform url"
                 type="text"
-                v-model="platformversion.titleUrl"
+                v-model="platform.titleUrl"
                 :state="getValidationState(validationContext)"
-                aria-describedby="titleUrl-required"
+                aria-describedby="url-required"
               ></b-form-input>
-              <b-form-invalid-feedback id="titleUrl-required">
+              <b-form-invalid-feedback id="url-required">
                 {{ validationContext.errors[0] }}</b-form-invalid-feedback
               >
             </b-input-group>
           </ValidationProvider>
+          <!-- Platform description -->
           <ValidationProvider
             name="Description"
             rules="required"
@@ -74,10 +71,10 @@
                 ></span>
               </b-input-group-prepend>
               <b-form-input
-                id="platformversion-description"
+                id="platform-description"
                 placeholder="Optional description"
                 type="text"
-                v-model="platformversion.description"
+                v-model="platform.description"
                 :state="getValidationState(validationContext)"
                 aria-describedby="description-required"
               ></b-form-input>
@@ -86,6 +83,7 @@
               >
             </b-input-group>
           </ValidationProvider>
+          <!-- Version url -->
           <ValidationProvider
             name="Version url"
             rules="required"
@@ -98,10 +96,10 @@
                 ></span>
               </b-input-group-prepend>
               <b-form-input
-                id="platformversion-version-url"
+                id="platform-version-url"
                 placeholder="Version url"
                 type="text"
-                v-model="platformversion.version.url"
+                v-model="platform.version.url"
                 :state="getValidationState(validationContext)"
                 aria-describedby="version-url-required"
               ></b-form-input>
@@ -110,6 +108,7 @@
               >
             </b-input-group>
           </ValidationProvider>
+          <!-- Version interval spinbutton -->
           <b-input-group class="mt-3">
             <b-input-group-prepend>
               <span class="input-group-text"
@@ -118,22 +117,24 @@
             </b-input-group-prepend>
             <b-form-spinbutton
               id="jenkins-interval"
-              v-model="platformversion.version.interval"
+              v-model="platform.version.interval"
               min="1"
               max="60"
               placeholder="Interval in seconds"
             >
             </b-form-spinbutton>
           </b-input-group>
+          <!-- Version ssl verification radiobutton -->
           <b-form-group class="text-center" label="SSL Verification?">
             <b-form-radio-group
-              v-model="platformversion.version.selected"
+              v-model="platform.version.selected"
               name="version-radios"
             >
               <b-form-radio value="yes">Yes</b-form-radio>
               <b-form-radio value="no">No</b-form-radio>
             </b-form-radio-group>
           </b-form-group>
+          <!-- Status url -->
           <ValidationProvider
             name="Status url"
             rules="required"
@@ -146,10 +147,10 @@
                 ></span>
               </b-input-group-prepend>
               <b-form-input
-                id="platformversion-status-url"
+                id="platform-status-url"
                 placeholder="Status url"
                 type="text"
-                v-model="platformversion.status.url"
+                v-model="platform.status.url"
                 :state="getValidationState(validationContext)"
                 aria-describedby="status-url-required"
               ></b-form-input>
@@ -158,6 +159,7 @@
               >
             </b-input-group>
           </ValidationProvider>
+          <!-- Version interval spinbutton -->
           <b-input-group class="mt-3">
             <b-input-group-prepend>
               <span class="input-group-text"
@@ -166,24 +168,26 @@
             </b-input-group-prepend>
             <b-form-spinbutton
               id="jenkins-interval"
-              v-model="platformversion.status.interval"
+              v-model="platform.status.interval"
               min="1"
               max="60"
               placeholder="Interval in seconds"
             >
             </b-form-spinbutton>
           </b-input-group>
+          <!-- Version ssl verification -->
           <b-form-group class="text-center" label="SSL Verification?">
             <b-form-radio-group
-              v-model="platformversion.status.selected"
+              v-model="platform.status.selected"
               name="status-radios"
             >
               <b-form-radio value="yes">Yes</b-form-radio>
               <b-form-radio value="no">No</b-form-radio>
             </b-form-radio-group>
           </b-form-group>
+          <!-- Submit button -->
           <b-button class="mt-3" type="submit" block
-            >Create platform version widget
+            >Create platform widget
           </b-button>
         </b-form>
       </ValidationObserver>
@@ -193,12 +197,12 @@
 
 <script>
 export default {
-  name: "AddButtonPlatformVersionWidget",
+  name: "AddButtonPlatformWidget",
   data() {
     return {
-      platformversion: {
+      platform: {
         title: "",
-        titleUrl: "",
+        url: "",
         description: "",
         version: {
           url: "",
@@ -224,27 +228,27 @@ export default {
         .post(
           `${process.env.VUE_APP_BASE_URL}/api/dashboards/${this.$route.params.slug}/widgets`,
           {
-            title: this.platformversion.title,
-            titleUrl: this.platformversion.titleUrl,
-            description: this.platformversion.description,
+            title: this.platform.title,
+            titleUrl: this.platform.url,
+            description: this.platform.description,
             type: "platform-status",
             sourceConfigs: [
               {
                 id: "version",
                 type: "urlSource",
-                interval: this.platformversion.version.interval * 1000,
+                interval: this.platform.version.interval * 1000,
                 configData: {
-                  url: this.platformversion.version.url,
-                  enableSslVerification: !this.platformversion.version.selected
+                  url: this.platform.version.url,
+                  enableSslVerification: !this.platform.version.selected
                 }
               },
               {
                 id: "status",
                 type: "urlSource",
-                interval: this.platformversion.status.interval * 1000,
+                interval: this.platform.status.interval * 1000,
                 configData: {
-                  url: this.platformversion.status.url,
-                  enableSslVerification: !this.platformversion.status.selected
+                  url: this.platform.status.url,
+                  enableSslVerification: !this.platform.status.selected
                 }
               }
             ]
@@ -255,7 +259,7 @@ export default {
         });
       this.$nextTick(() => {
         this.$refs.form.reset();
-        this.$bvModal.hide("add-platformversion");
+        this.$bvModal.hide("add-platform");
       });
     }
   }

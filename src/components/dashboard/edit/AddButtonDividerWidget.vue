@@ -1,14 +1,14 @@
 <template>
   <div>
-    <!-- Add divider widget modal button -->
-    <b-button v-b-modal.add-divider>
+    <!-- Add divider widget button -->
+    <b-button variant="outline-light" v-b-modal.add-divider block>
       <span class="h4">Add widget divider</span>
     </b-button>
-    <!-- Add divider widget modal window -->
+    <!-- Divider widget modal -->
     <b-modal id="add-divider" title="Add divider" centered hide-footer>
       <ValidationObserver v-slot="{ handleSubmit }" ref="form">
         <b-form @submit.prevent="handleSubmit(onSubmit)">
-          <!-- Divider name input -->
+          <!-- Title input -->
           <ValidationProvider
             name="Name"
             rules="required"
@@ -33,7 +33,7 @@
               >
             </b-input-group>
           </ValidationProvider>
-          <!-- Divider widget description input -->
+          <!-- Description input -->
           <b-input-group class="mt-3">
             <b-input-group-prepend>
               <span class="input-group-text"><b-icon-info></b-icon-info></span>
@@ -45,7 +45,7 @@
               v-model="divider.description"
             ></b-form-input
           ></b-input-group>
-          <!-- Divider widget submit button -->
+          <!-- Submit button -->
           <b-button class="mt-3" type="submit" block
             >Create widget divider
           </b-button>

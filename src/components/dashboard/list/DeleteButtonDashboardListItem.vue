@@ -1,19 +1,40 @@
 <template>
   <div>
     <!-- Delete dashboard modal button -->
-    <b-button class="m-2" @click="$bvModal.show(slug)">
+    <b-button class="m-2" variant="outline-light" @click="$bvModal.show(slug)">
       <b-icon-trash-fill font-scale="1.5"></b-icon-trash-fill>
     </b-button>
     <!-- Delete dashboard modal windows -->
-    <b-modal :id="slug" title="Delete dashboard" hide-footer>
+    <b-modal
+      :id="slug"
+      title="Delete dashboard"
+      header-bg-variant="danger"
+      header-text-variant="light"
+      centered
+      hide-footer
+    >
       <!-- Delete dashboard modal content -->
       <div class="d-block text-center">
-        <h3>Do you really want to delete {{ name }}?</h3>
+        Do you really want to delete dashboard: {{ name }}?
       </div>
-      <!-- Delete dashboard yes button -->
-      <b-button class="mt-3" @click="onDelete" block>Yes</b-button>
-      <!-- Delete dashboard no button -->
-      <b-button class="mt-3" @click="$bvModal.hide(slug)" block>No</b-button>
+      <b-row>
+        <b-col
+          ><!-- Delete dashboard yes button -->
+          <b-button class="mt-3" variant="success" @click="onDelete" block
+            ><b-icon-check></b-icon-check
+          ></b-button>
+        </b-col>
+        <b-col>
+          <!-- Delete dashboard no button -->
+          <b-button
+            class="mt-3"
+            variant="danger"
+            @click="$bvModal.hide(slug)"
+            block
+            ><b-icon-x></b-icon-x
+          ></b-button>
+        </b-col>
+      </b-row>
     </b-modal>
   </div>
 </template>
