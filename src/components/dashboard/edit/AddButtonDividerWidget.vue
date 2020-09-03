@@ -8,7 +8,7 @@
     <b-modal id="add-divider" title="Add divider" centered hide-footer>
       <ValidationObserver v-slot="{ handleSubmit }" ref="form">
         <b-form @submit.prevent="handleSubmit(onSubmit)">
-          <!-- Title input -->
+          <!-- Divider widget title -->
           <ValidationProvider
             name="Name"
             rules="required"
@@ -33,7 +33,7 @@
               >
             </b-input-group>
           </ValidationProvider>
-          <!-- Description input -->
+          <!-- Divider widget description -->
           <b-input-group class="mt-3">
             <b-input-group-prepend>
               <span class="input-group-text"><b-icon-info></b-icon-info></span>

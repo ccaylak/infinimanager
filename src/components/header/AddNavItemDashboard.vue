@@ -1,8 +1,8 @@
 <template>
   <div>
-    <!-- Add dashboard modal button -->
+    <!-- Add dashboard button -->
     <b-nav-item v-b-modal.add-dashboard>Add dashboard</b-nav-item>
-    <!-- Add dashboard modal window -->
+    <!-- Dashboard modal -->
     <b-modal
       id="add-dashboard"
       title="Add dashboard"
@@ -12,7 +12,7 @@
     >
       <ValidationObserver v-slot="{ handleSubmit }" ref="form">
         <b-form @submit.prevent="handleSubmit(onSubmit)">
-          <!-- Dashboard name input -->
+          <!-- Dashboard name -->
           <ValidationProvider
             name="Name"
             rules="required"
@@ -36,7 +36,7 @@
               </b-form-invalid-feedback>
             </b-input-group>
           </ValidationProvider>
-          <!-- Dashboard slug input -->
+          <!-- Dashboard slug -->
           <ValidationProvider
             name="Slug"
             :rules="{ required: true, regex: /^[a-z0-9-_]+$/ }"
@@ -61,7 +61,7 @@
               </b-form-invalid-feedback>
             </b-input-group>
           </ValidationProvider>
-          <!-- Dashboard description input -->
+          <!-- Dashboard description -->
           <ValidationProvider name="Description">
             <b-input-group class="mt-3">
               <b-input-group-prepend>
@@ -77,7 +77,7 @@
               ></b-form-input>
             </b-input-group>
           </ValidationProvider>
-          <!-- Dashboard submit button -->
+          <!-- Submit button -->
           <b-button class="mt-3" block type="submit">Create dashboard</b-button>
         </b-form>
       </ValidationObserver>

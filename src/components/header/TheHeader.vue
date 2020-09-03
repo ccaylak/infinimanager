@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- Header title -->
+    <!-- Navbar title -->
     <b-navbar class="navbar" type="light" fixed="top" toggleable="md">
       <b-navbar-brand class="mb-0 clickable" tag="h1" @click="toHome"
         >InfiniManager</b-navbar-brand

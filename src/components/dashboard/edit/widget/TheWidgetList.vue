@@ -22,12 +22,12 @@
                 :url="widget.sourceConfigs[0].configData.url"
                 :widget-id="widget.widgetId"
               ></jenkins-widget>
-              <platformversion-widget
+              <platform-widget
                 v-if="widget.type === 'platform-status'"
                 :title="widget.title"
                 :description="widget.description"
                 :widget-id="widget.widgetId"
-              ></platformversion-widget>
+              ></platform-widget>
             </div>
           </div>
         </b-card-group>
@@ -39,17 +39,16 @@
 <script>
 import DividerWidget from "@/components/dashboard/edit/widget/DividerWidget";
 import JenkinsWidget from "@/components/dashboard/edit/widget/JenkinsWidget";
-import PlatformversionWidget from "@/components/dashboard/edit/widget/PlatformWidget";
+import PlatformWidget from "@/components/dashboard/edit/widget/PlatformWidget";
 export default {
   name: "TheWidgetList",
-  components: { PlatformversionWidget, JenkinsWidget, DividerWidget },
+  components: { PlatformWidget, JenkinsWidget, DividerWidget },
   data() {
     return {
       widgets: []
     };
   },
   methods: {
-    // @Copyright2020 Frederik Schlemmer
     splitWidgets(list) {
       for (let i = 0; i < list.length; i++) {
         if (list[i].type === "divider") {

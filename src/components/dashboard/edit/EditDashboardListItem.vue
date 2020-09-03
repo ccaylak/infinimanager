@@ -23,7 +23,7 @@
             </div>
             <b-row class="pt-3 pb-3">
               <b-col>
-                <!-- Add widget divider button -->
+                <!-- Add Divider widget button -->
                 <add-button-divider-widget></add-button-divider-widget>
               </b-col>
               <b-col>
@@ -31,7 +31,7 @@
                 <add-button-jenkins-widget></add-button-jenkins-widget>
               </b-col>
               <b-col>
-                <!-- Add platform version widget button -->
+                <!-- Add platform widget button -->
                 <add-button-platform-widget></add-button-platform-widget>
               </b-col>
             </b-row>

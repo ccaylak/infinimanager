@@ -7,11 +7,11 @@
   >
     <b-row>
       <b-col>
-        <!-- Title -->
-        <b-card-title>Title</b-card-title>
+        <!-- Jenkins widget title -->
+        <b-card-title>{{ url }}</b-card-title>
       </b-col>
       <b-col lg="3">
-        <!-- Delete button -->
+        <!-- Delete jenkins widget button -->
         <delete-button-widget :title="title" :id="widgetId">
         </delete-button-widget>
       </b-col>

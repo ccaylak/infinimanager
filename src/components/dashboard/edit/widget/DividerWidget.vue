@@ -4,16 +4,16 @@
       <b-col>
         <div class="h4">
           <u>
-            <!-- Title -->
+            <!-- Divider widget title -->
             {{ title }}
-            <!-- Description -->
+            <!-- Divider widget description -->
             <span v-if="description" class="font-weight-lighter"
               >- {{ description }}</span
             >
           </u>
         </div>
       </b-col>
-      <!-- Delete button-->
+      <!-- Delete divider widget button-->
       <b-col sm="0.5">
         <delete-button-widget
           :title="title"

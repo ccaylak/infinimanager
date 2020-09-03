@@ -7,11 +7,11 @@
   >
     <b-row>
       <b-col>
-        <!-- Description -->
+        <!-- Platform widget Description -->
         <b-card-title>{{ description }}</b-card-title>
       </b-col>
       <b-col>
-        <!-- Delete button -->
+        <!-- Delete platform widget button -->
         <delete-button-widget :title="title" :id="widgetId">
         </delete-button-widget>
       </b-col>
