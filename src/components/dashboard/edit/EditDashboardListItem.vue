@@ -57,23 +57,13 @@ export default {
     AddButtonJenkinsWidget,
     AddButtonDividerWidget
   },
-  data() {
-    return {
-      dashboard: {
-        name: null,
-        description: null
-      }
-    };
+  created() {
+    this.$store.dispatch("loadDashboard", this.$route.params.slug);
   },
-  mounted() {
-    this.$http
-      .get(
-        `${process.env.VUE_APP_BASE_URL}/api/dashboards/${this.$route.params.slug}`
-      )
-      .then(response => {
-        this.dashboard.name = response.data.name;
-        this.dashboard.description = response.data.description;
-      });
+  computed: {
+    dashboard() {
+      return this.$store.state.dashboard;
+    }
   },
   methods: {
     toRoot() {

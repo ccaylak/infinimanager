@@ -6,6 +6,7 @@
           :title="uwidget.title"
           :description="uwidget.description"
           :widget-id="uwidget.widgetId"
+          :dashboard-id="uwidget.dashboardId"
         ></divider-widget>
       </template>
 
@@ -21,12 +22,14 @@
                 :title="widget.title"
                 :url="widget.sourceConfigs[0].configData.url"
                 :widget-id="widget.widgetId"
+                :dashboard-id="uwidget.dashboardId"
               ></jenkins-widget>
               <platform-widget
                 v-if="widget.type === 'platform-status'"
                 :title="widget.title"
                 :description="widget.description"
                 :widget-id="widget.widgetId"
+                :dashboard-id="uwidget.dashboardId"
               ></platform-widget>
             </div>
           </div>
@@ -43,11 +46,6 @@ import PlatformWidget from "@/components/dashboard/edit/widget/PlatformWidget";
 export default {
   name: "TheWidgetList",
   components: { PlatformWidget, JenkinsWidget, DividerWidget },
-  data() {
-    return {
-      widgets: []
-    };
-  },
   methods: {
     splitWidgets(list) {
       for (let i = 0; i < list.length; i++) {
@@ -60,14 +58,16 @@ export default {
       }
     }
   },
-  mounted() {
-    this.$http
-      .get(
-        `${process.env.VUE_APP_BASE_URL}/api/dashboards/${this.$route.params.slug}/widgets/all`
-      )
-      .then(response => {
-        this.widgets = response.data._embedded.widgetConfigResourceList;
-      });
+  created() {
+    this.$store.dispatch("loadWidgets", this.$route.params.slug);
+  },
+  destroyed() {
+    this.widgets;
+  },
+  computed: {
+    widgets() {
+      return this.$store.state.widgets;
+    }
   }
 };
 </script>

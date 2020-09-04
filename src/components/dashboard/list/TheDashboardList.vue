@@ -16,26 +16,18 @@
 
 <script>
 import DashboardItem from "@/components/dashboard/list/DashboardListItem";
+
 export default {
   name: "TheDashboardList",
   components: {
     DashboardItem
   },
-  mounted() {
-    this.getDashboards();
+  created() {
+    this.$store.dispatch("loadDashboards");
   },
-  data() {
-    return {
-      dashboards: []
-    };
-  },
-  methods: {
-    getDashboards() {
-      this.$http
-        .get(`${process.env.VUE_APP_BASE_URL}/api/dashboards`)
-        .then(response => {
-          this.dashboards = response.data._embedded.dashboardResourceList;
-        });
+  computed: {
+    dashboards() {
+      return this.$store.state.dashboards;
     }
   }
 };

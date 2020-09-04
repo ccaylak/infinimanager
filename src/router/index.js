@@ -3,11 +3,8 @@ import VueRouter from "vue-router";
 import TheDashboardList from "@/components/dashboard/list/TheDashboardList";
 import EditDashboardItem from "@/components/dashboard/edit/EditDashboardListItem";
 import TheLogin from "@/components/header/TheLogin";
-import axios from "axios";
 
 Vue.use(VueRouter);
-
-Vue.prototype.$http = axios;
 
 const routes = [
   { path: "/", component: TheDashboardList },
