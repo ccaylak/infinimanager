@@ -174,7 +174,7 @@ export default {
       this.$nextTick(() => {
         this.$refs.form.reset();
         this.$bvModal.hide("add-jenkins");
-        this.clearInput(this.jenkins);
+        //this.clearInput(this.jenkins);
       });
     }
   }

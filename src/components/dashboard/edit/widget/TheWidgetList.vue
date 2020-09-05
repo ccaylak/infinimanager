@@ -61,9 +61,6 @@ export default {
   created() {
     this.$store.dispatch("loadWidgets", this.$route.params.slug);
   },
-  destroyed() {
-    this.widgets;
-  },
   computed: {
     widgets() {
       return this.$store.state.widgets;

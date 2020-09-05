@@ -41,11 +41,7 @@ export default {
     DeleteDashboardModal
   },
   props: {
-    dashboard: {
-      name: String,
-      description: String,
-      slug: String
-    }
+    dashboard: Object
   }
 };
 </script>

@@ -12,7 +12,7 @@
       </b-col>
       <b-container>
         <b-row class="list-item shadow-lg">
-          <b-col>
+          <b-col v-if="dashboard">
             <!-- Dashboard name -->
             <div class="h1 font-weight-bolder">
               {{ dashboard.name }}

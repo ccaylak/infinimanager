@@ -19,6 +19,9 @@ export default new Vuex.Store({
             "SET_DASHBOARDS",
             response.data._embedded.dashboardResourceList
           );
+        })
+        .catch(() => {
+          console.log("No dashboards available");
         });
     },
     loadDashboard({ commit }, slug) {
@@ -56,6 +59,9 @@ export default new Vuex.Store({
             "SET_WIDGETS",
             response.data._embedded.widgetConfigResourceList
           );
+        })
+        .catch(() => {
+          console.log("No widgets available");
         });
     },
     addDivider({ commit }, { slug, divider }) {
