@@ -50,7 +50,7 @@
                 id="jenkins-url"
                 placeholder="URL"
                 type="text"
-                v-model="jenkins.sourceConfigs.configData.url"
+                v-model="jenkins.url"
                 :state="getValidationState(validationContext)"
                 aria-describedby="url-required"
               >
@@ -69,7 +69,7 @@
             </b-input-group-prepend>
             <b-form-spinbutton
               id="jenkins-interval"
-              v-model="jenkins.sourceConfigs.interval"
+              v-model="jenkins.interval"
               min="1"
               max="60"
               placeholder="Interval in seconds"
@@ -91,7 +91,7 @@
               <b-form-input
                 id="jenkins-username"
                 type="text"
-                v-model="jenkins.sourceConfigs.configData.username"
+                v-model="jenkins.username"
                 placeholder="Username"
                 :state="getValidationState(validationContext)"
                 aria-describedby="username-required"
@@ -118,7 +118,7 @@
                 id="jenkins-password"
                 type="password"
                 placeholder="Password"
-                v-model="jenkins.sourceConfigs.configData.password"
+                v-model="jenkins.password"
                 :state="getValidationState(validationContext)"
                 aria-describedby="password-required"
               >
@@ -130,7 +130,7 @@
           </ValidationProvider>
           <!-- Ssl verification radiobutton -->
           <b-form-group class="text-center" label="SSL Verification?">
-            <b-form-radio-group v-model="selected" name="some-radios">
+            <b-form-radio-group v-model="jenkins.selected" name="some-radios">
               <b-form-radio value="yes">Yes</b-form-radio>
               <b-form-radio value="no">No</b-form-radio>
             </b-form-radio-group>
@@ -150,17 +150,13 @@ export default {
   name: "AddButtonJenkinsWidget",
   data() {
     return {
-      selected: "no",
       jenkins: {
+        selected: "no",
         title: "",
-        sourceConfigs: {
-          interval: null,
-          configData: {
-            url: "",
-            username: "",
-            password: ""
-          }
-        }
+        interval: null,
+        url: "",
+        username: "",
+        password: ""
       }
     };
   },
@@ -171,33 +167,14 @@ export default {
           return 0;
         }
       });
-      this.$http
-        .post(
-          `${process.env.VUE_APP_BASE_URL}/api/dashboards/${this.$route.params.slug}/widgets`,
-          {
-            title: this.jenkins.title,
-            type: "jenkins",
-            sourceConfigs: [
-              {
-                id: "jenkins",
-                type: "urlSource",
-                interval: this.jenkins.sourceConfigs.interval * 1000,
-                configData: {
-                  url: this.jenkins.sourceConfigs.configData.url,
-                  enableSslVerification: !this.selected,
-                  username: this.jenkins.sourceConfigs.configData.username,
-                  password: this.jenkins.sourceConfigs.configData.password
-                }
-              }
-            ]
-          }
-        )
-        .then(response => {
-          console.log(response);
-        });
+      this.$store.dispatch("addJenkins", {
+        slug: this.$route.params.slug,
+        jenkins: this.jenkins
+      });
       this.$nextTick(() => {
         this.$refs.form.reset();
         this.$bvModal.hide("add-jenkins");
+        //this.clearInput(this.jenkins);
       });
     }
   }

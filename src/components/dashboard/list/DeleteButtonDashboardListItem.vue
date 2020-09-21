@@ -48,11 +48,10 @@ export default {
   },
   methods: {
     onDelete() {
-      this.$http
-        .delete(`${process.env.VUE_APP_BASE_URL}/api/dashboards/${this.slug}`)
-        .then(() => {
-          this.$bvModal.hide(this.slug);
-        });
+      this.$store.dispatch("deleteDashboard", this.slug);
+      this.$nextTick(() => {
+        this.$bvModal.hide(this.slug);
+      });
     }
   }
 };

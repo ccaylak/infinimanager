@@ -224,42 +224,14 @@ export default {
           return 0;
         }
       });
-      this.$http
-        .post(
-          `${process.env.VUE_APP_BASE_URL}/api/dashboards/${this.$route.params.slug}/widgets`,
-          {
-            title: this.platform.title,
-            titleUrl: this.platform.url,
-            description: this.platform.description,
-            type: "platform-status",
-            sourceConfigs: [
-              {
-                id: "version",
-                type: "urlSource",
-                interval: this.platform.version.interval * 1000,
-                configData: {
-                  url: this.platform.version.url,
-                  enableSslVerification: !this.platform.version.selected
-                }
-              },
-              {
-                id: "status",
-                type: "urlSource",
-                interval: this.platform.status.interval * 1000,
-                configData: {
-                  url: this.platform.status.url,
-                  enableSslVerification: !this.platform.status.selected
-                }
-              }
-            ]
-          }
-        )
-        .then(response => {
-          console.log(response);
-        });
+      this.$store.dispatch("addPlatform", {
+        slug: this.$route.params.slug,
+        platform: this.platform
+      });
       this.$nextTick(() => {
         this.$refs.form.reset();
         this.$bvModal.hide("add-platform");
+        this.clearInput(this.platform);
       });
     }
   }

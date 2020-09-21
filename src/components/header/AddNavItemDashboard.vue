@@ -104,20 +104,11 @@ export default {
           return 0;
         }
       });
-      this.$http
-        .post(`${process.env.VUE_APP_BASE_URL}/api/dashboards`, {
-          name: this.dashboard.name,
-          slug: this.dashboard.slug,
-          description: this.dashboard.description
-        })
-        .then(response => {
-          console.log(response);
-        });
+      this.$store.dispatch("addDashboard", this.dashboard);
       this.$nextTick(() => {
         this.$refs.form.reset();
         this.$bvModal.hide("add-dashboard");
-        this.dashboard.name = this.dashboard.slug = this.dashboard.description =
-          "";
+        this.clearInput(this.dashboard);
       });
     }
   }

@@ -12,7 +12,11 @@
       </b-col>
       <b-col>
         <!-- Delete platform widget button -->
-        <delete-button-widget :title="title" :id="widgetId">
+        <delete-button-widget
+          :title="title"
+          :widget-id="widgetId"
+          :dashboard-id="dashboardId"
+        >
         </delete-button-widget>
       </b-col>
     </b-row>
@@ -27,7 +31,8 @@ export default {
   props: {
     title: String,
     description: String,
-    widgetId: String
+    widgetId: String,
+    dashboardId: String
   }
 };
 </script>

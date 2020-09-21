@@ -18,7 +18,6 @@ export default {
 .clickable {
   cursor: pointer;
 }
-
 .headerOverlap {
   padding-top: 56px;
 }

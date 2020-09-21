@@ -4,7 +4,7 @@
     <b-button
       variant="outline-danger"
       size="sm"
-      @click="$bvModal.show(title)"
+      @click="$bvModal.show(widgetId)"
       block
     >
       <b-icon-trash font-scale="2"></b-icon-trash>
@@ -12,7 +12,7 @@
     <b-modal
       header-bg-variant="danger"
       header-text-variant="light"
-      :id="title"
+      :id="widgetId"
       title="Delete divider widget"
       centered
       hide-footer
@@ -33,7 +33,7 @@
           <b-button
             class="mt-3"
             variant="danger"
-            @click="$bvModal.hide(title)"
+            @click="$bvModal.hide(widgetId)"
             block
             ><b-icon-x></b-icon-x>
           </b-button>
@@ -48,17 +48,19 @@ export default {
   name: "DeleteButtonWidget",
   props: {
     title: String,
-    id: String
+    widgetId: String,
+    dashboardId: String
   },
   methods: {
     onDelete() {
-      this.$http
-        .delete(
-          `${process.env.VUE_APP_BASE_URL}/api/dashboards/${this.$route.params.slug}/widgets/${this.id}`
-        )
-        .then(() => {
-          this.$bvModal.hide(this.title);
-        });
+      this.$store.dispatch("deleteWidget", {
+        slug: this.$route.params.slug,
+        dashboardId: this.dashboardId,
+        widgetId: this.widgetId
+      });
+      this.$nextTick(() => {
+        this.$bvModal.hide(this.widgetId);
+      });
     }
   }
 };

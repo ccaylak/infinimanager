@@ -73,22 +73,14 @@ export default {
           return 0;
         }
       });
-      this.$http
-        .post(
-          `${process.env.VUE_APP_BASE_URL}/api/dashboards/${this.$route.params.slug}/widgets`,
-          {
-            title: this.divider.title,
-            description: this.divider.description,
-            type: "divider"
-          }
-        )
-        .then(function(response) {
-          console.log(response.data);
-        });
-      this.divider.title = this.divider.description = "";
+      this.$store.dispatch("addDivider", {
+        slug: this.$route.params.slug,
+        divider: this.divider
+      });
       this.$nextTick(() => {
         this.$refs.form.reset();
         this.$bvModal.hide("add-divider");
+        this.clearInput(this.divider);
       });
     }
   }
