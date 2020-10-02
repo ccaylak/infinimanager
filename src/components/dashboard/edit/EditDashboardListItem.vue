@@ -11,7 +11,7 @@
         ></b-icon-arrow-left-circle-fill>
       </b-col>
       <b-container>
-        <b-row class="list-item shadow-lg">
+        <b-row v-if="!loading" class="list-item shadow-lg">
           <b-col v-if="dashboard">
             <!-- Dashboard name -->
             <div class="h1 font-weight-bolder">
@@ -37,6 +37,13 @@
             </b-row>
           </b-col>
         </b-row>
+        <b-row v-else class="justify-content-center">
+          <b-spinner
+            class="mt-5"
+            label="Loading..."
+            variant="primary"
+          ></b-spinner>
+        </b-row>
       </b-container>
     </b-row>
     <TheWidgetList class="pt-3" />
@@ -58,7 +65,12 @@ export default {
     AddButtonDividerWidget
   },
   created() {
-    this.$store.dispatch("loadDashboard", this.$route.params.slug);
+    this.getDashboards();
+  },
+  data() {
+    return {
+      loading: false
+    };
   },
   computed: {
     dashboard() {
@@ -68,6 +80,11 @@ export default {
   methods: {
     toRoot() {
       this.$router.push("../");
+    },
+    async getDashboards() {
+      this.loading = true;
+      await this.$store.dispatch("loadDashboard", this.$route.params.slug);
+      this.loading = false;
     }
   }
 };

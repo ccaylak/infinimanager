@@ -19,7 +19,7 @@
     >
       <!-- Delete widget modal -->
       <div class="d-block text-center">
-        Do you really want to Widget: {{ title }}?
+        Do you really want to widget "{{ title }}"?
       </div>
       <b-row>
         <b-col>
@@ -55,8 +55,8 @@ export default {
     onDelete() {
       this.$store.dispatch("deleteWidget", {
         slug: this.$route.params.slug,
-        dashboardId: this.dashboardId,
-        widgetId: this.widgetId
+        widgetId: this.widgetId,
+        title: this.title
       });
       this.$nextTick(() => {
         this.$bvModal.hide(this.widgetId);

@@ -11,8 +11,8 @@ export default new Vuex.Store({
     widgets: []
   },
   actions: {
-    loadDashboards({ commit }) {
-      axios
+    async loadDashboards({ commit }) {
+      await axios
         .get(`${process.env.VUE_APP_BASE_URL}/api/dashboards`)
         .then(response => {
           commit(
@@ -24,15 +24,21 @@ export default new Vuex.Store({
           console.log("No dashboards available");
         });
     },
-    loadDashboard({ commit }, slug) {
-      axios
+    async loadDashboard({ commit }, slug) {
+      await axios
         .get(`${process.env.VUE_APP_BASE_URL}/api/dashboards/${slug}`)
         .then(response => {
           commit("SET_DASHBOARD", response.data);
+        })
+        .then(() => new Promise(resolve => setTimeout(resolve, 2000)))
+        .catch(error => {
+          if (error.response.status === 404) {
+            Vue.$snotify.error(`Dashboard with slug "${slug}" does not exist`);
+          }
         });
     },
-    addDashboard({ commit }, dashboard) {
-      axios
+    async addDashboard({ commit }, dashboard) {
+      await axios
         .post(`${process.env.VUE_APP_BASE_URL}/api/dashboards`, {
           name: dashboard.name,
           slug: dashboard.slug,
@@ -40,17 +46,33 @@ export default new Vuex.Store({
         })
         .then(response => {
           commit("ADD_DASHBOARD", response.data);
+          Vue.$snotify.success(
+            `Dashboard "${response.data.name}" has been created!`
+          );
+        })
+        .catch(error => {
+          if (error.response.status === 400) {
+            Vue.$snotify.error(
+              `Dashboard "${dashboard.name}" with slug "${dashboard.slug}" already exists`
+            );
+          }
         });
     },
-    deleteDashboard({ commit }, slug) {
-      axios
+    async deleteDashboard({ commit }, { slug, name }) {
+      await axios
         .delete(`${process.env.VUE_APP_BASE_URL}/api/dashboards/${slug}`)
         .then(() => {
           commit("DELETE_DASHBOARD", slug);
+          Vue.$snotify.success(`Dashboard "${name}" has been deleted!`);
+        })
+        .catch(error => {
+          if (error.response.status === 404) {
+            Vue.$snotify.error(`Dashboard "${name}" does not exist`);
+          }
         });
     },
-    loadWidgets({ commit }, slug) {
-      axios
+    async loadWidgets({ commit }, slug) {
+      await axios
         .get(
           `${process.env.VUE_APP_BASE_URL}/api/dashboards/${slug}/widgets/all`
         )
@@ -61,11 +83,13 @@ export default new Vuex.Store({
           );
         })
         .catch(() => {
-          console.log("No widgets available");
+          Vue.$snotify.warning("No widgets available", {
+            timeout: 5000
+          });
         });
     },
-    addDivider({ commit }, { slug, divider }) {
-      axios
+    async addDivider({ commit }, { slug, divider }) {
+      await axios
         .post(
           `${process.env.VUE_APP_BASE_URL}/api/dashboards/${slug}/widgets`,
           {
@@ -76,10 +100,13 @@ export default new Vuex.Store({
         )
         .then(response => {
           commit("ADD_WIDGET", response.data);
+          Vue.$snotify.success(
+            `Divider widget "${response.data.title}" has been created!`
+          );
         });
     },
-    addJenkins({ commit }, { slug, jenkins }) {
-      axios
+    async addJenkins({ commit }, { slug, jenkins }) {
+      await axios
         .post(
           `${process.env.VUE_APP_BASE_URL}/api/dashboards/${slug}/widgets`,
           {
@@ -102,10 +129,13 @@ export default new Vuex.Store({
         )
         .then(response => {
           commit("ADD_WIDGET", response.data);
+          Vue.$snotify.success(
+            `Jenkins widget "${response.data.title}" has been created!`
+          );
         });
     },
-    addPlatform({ commit }, { slug, platform }) {
-      axios
+    async addPlatform({ commit }, { slug, platform }) {
+      await axios
         .post(
           `${process.env.VUE_APP_BASE_URL}/api/dashboards/${slug}/widgets`,
           {
@@ -137,15 +167,24 @@ export default new Vuex.Store({
         )
         .then(response => {
           commit("ADD_WIDGET", response.data);
+          Vue.$snotify.success(
+            `Platform widget "${response.data.title}" has been created!`
+          );
         });
     },
-    deleteWidget({ commit }, { slug, widgetId }) {
-      axios
+    async deleteWidget({ commit }, { slug, widgetId, title }) {
+      await axios
         .delete(
           `${process.env.VUE_APP_BASE_URL}/api/dashboards/${slug}/widgets/${widgetId}`
         )
         .then(() => {
           commit("DELETE_WIDGET", widgetId);
+          Vue.$snotify.error(`Widget "${title}" has been deleted!`);
+        })
+        .catch(error => {
+          if (error.response.status === 404) {
+            Vue.$snotify.error(`Widget "${title}" does not exist`);
+          }
         });
     }
   },

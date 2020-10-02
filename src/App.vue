@@ -3,12 +3,12 @@
     <TheHeader />
     <router-view class="headerOverlap footerOverlap"></router-view>
     <TheFooter />
+    <vue-snotify></vue-snotify>
   </div>
 </template>
 <script>
 import TheHeader from "@/components/header/TheHeader";
 import TheFooter from "@/components/footer/TheFooter";
-
 export default {
   components: { TheFooter, TheHeader }
 };

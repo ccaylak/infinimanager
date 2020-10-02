@@ -2,7 +2,7 @@
   <div>
     <!-- Navbar title -->
     <b-navbar class="navbar" type="light" fixed="top" toggleable="md">
-      <b-navbar-brand class="mb-0 clickable" tag="h1" @click="toHome"
+      <b-navbar-brand class="mb-0 clickable" tag="h1"
         >InfiniManager</b-navbar-brand
       >
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -35,9 +35,6 @@ export default {
   methods: {
     toLogin() {
       this.$router.push("../login");
-    },
-    toHome() {
-      this.$router.push("./");
     }
   }
 };

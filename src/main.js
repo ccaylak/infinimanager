@@ -5,6 +5,8 @@ import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import store from "./store/store";
+import Snotify from "vue-snotify";
+import "vue-snotify/styles/material.css";
 
 import { ValidationObserver, ValidationProvider, extend } from "vee-validate";
 import { required, regex, email } from "vee-validate/dist/rules";
@@ -18,6 +20,15 @@ Vue.use(IconsPlugin);
 
 Vue.component("ValidationObserver", ValidationObserver);
 Vue.component("ValidationProvider", ValidationProvider);
+
+Vue.use(Snotify, {
+  toast: {
+    timeout: 3000,
+    showProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: false
+  }
+});
 
 Vue.config.productionTip = false;
 
@@ -37,5 +48,8 @@ Vue.mixin({
 new Vue({
   store,
   router,
-  render: h => h(App)
+  render: h => h(App),
+  beforeCreate() {
+    Vue.$snotify = this.$snotify;
+  }
 }).$mount("#app");

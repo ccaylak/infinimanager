@@ -3,13 +3,7 @@
     <!-- Add dashboard button -->
     <b-nav-item v-b-modal.add-dashboard>Add dashboard</b-nav-item>
     <!-- Dashboard modal -->
-    <b-modal
-      id="add-dashboard"
-      title="Add dashboard"
-      size="sm"
-      centered
-      hide-footer
-    >
+    <b-modal id="add-dashboard" title="Add dashboard" centered hide-footer>
       <ValidationObserver v-slot="{ handleSubmit }" ref="form">
         <b-form @submit.prevent="handleSubmit(onSubmit)">
           <!-- Dashboard name -->
@@ -78,7 +72,15 @@
             </b-input-group>
           </ValidationProvider>
           <!-- Submit button -->
-          <b-button class="mt-3" block type="submit">Create dashboard</b-button>
+          <b-button class="mt-3" block type="submit">
+            <span v-if="!loading">Create dashboard</span>
+            <b-spinner
+              v-if="loading"
+              class="justify-content-center"
+              label="Loading.."
+              variant="light"
+            ></b-spinner>
+          </b-button>
         </b-form>
       </ValidationObserver>
     </b-modal>
@@ -94,17 +96,20 @@ export default {
         name: "",
         slug: "",
         description: ""
-      }
+      },
+      loading: false
     };
   },
   methods: {
-    onSubmit() {
+    async onSubmit() {
       this.$refs.form.validate().then(success => {
         if (!success) {
           return 0;
         }
       });
-      this.$store.dispatch("addDashboard", this.dashboard);
+      this.loading = true;
+      await this.$store.dispatch("addDashboard", this.dashboard);
+      this.loading = false;
       this.$nextTick(() => {
         this.$refs.form.reset();
         this.$bvModal.hide("add-dashboard");

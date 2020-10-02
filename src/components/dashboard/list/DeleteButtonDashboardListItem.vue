@@ -15,7 +15,7 @@
     >
       <!-- Delete dashboard modal content -->
       <div class="d-block text-center">
-        Do you really want to delete dashboard: {{ name }}?
+        Do you really want to delete dashboard "{{ name }}"?
       </div>
       <b-row>
         <b-col
@@ -48,7 +48,10 @@ export default {
   },
   methods: {
     onDelete() {
-      this.$store.dispatch("deleteDashboard", this.slug);
+      this.$store.dispatch("deleteDashboard", {
+        slug: this.slug,
+        name: this.name
+      });
       this.$nextTick(() => {
         this.$bvModal.hide(this.slug);
       });
