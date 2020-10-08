@@ -1,13 +1,18 @@
 <template>
   <div>
-    <div v-if="dashboards.length > 0 && !loading">
+    <transition-group
+      name="slide"
+      enter-active-class="slideInLeft"
+      leave-active-class="slideOutRight"
+      v-if="dashboards.length > 0 && !loading"
+    >
       <dashboard-item
         class="list-item mt-2 shadow-lg"
         v-for="dashboard in dashboards"
         :key="dashboard.slug"
         :dashboard="dashboard"
       />
-    </div>
+    </transition-group>
     <div
       v-else-if="dashboards.length === 0 && !loading"
       class="text-center mt-5"
@@ -30,7 +35,7 @@ export default {
   components: {
     DashboardItem
   },
-  created() {
+  mounted() {
     this.getDashboards();
   },
   data() {

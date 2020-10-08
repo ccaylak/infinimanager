@@ -79,6 +79,7 @@
               class="justify-content-center"
               label="Loading.."
               variant="light"
+              small
             ></b-spinner>
           </b-button>
         </b-form>

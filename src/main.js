@@ -7,6 +7,7 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 import store from "./store/store";
 import Snotify from "vue-snotify";
 import "vue-snotify/styles/material.css";
+import "vue2-animate/dist/vue2-animate.min.css";
 
 import { ValidationObserver, ValidationProvider, extend } from "vee-validate";
 import { required, regex, email } from "vee-validate/dist/rules";

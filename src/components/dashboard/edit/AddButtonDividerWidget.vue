@@ -46,8 +46,15 @@
             ></b-form-input
           ></b-input-group>
           <!-- Submit button -->
-          <b-button class="mt-3" type="submit" block
-            >Create widget divider
+          <b-button class="mt-3" type="submit" block>
+            <span v-if="!loading">Create widget divider</span>
+            <b-spinner
+              v-if="loading"
+              class="justify-content-center"
+              label="Loading.."
+              variant="light"
+              small
+            ></b-spinner>
           </b-button>
         </b-form>
       </ValidationObserver>
@@ -63,20 +70,23 @@ export default {
       divider: {
         title: "",
         description: ""
-      }
+      },
+      loading: false
     };
   },
   methods: {
-    onSubmit() {
+    async onSubmit() {
       this.$refs.form.validate().then(success => {
         if (!success) {
           return 0;
         }
       });
-      this.$store.dispatch("addDivider", {
+      this.loading = true;
+      await this.$store.dispatch("addDivider", {
         slug: this.$route.params.slug,
         divider: this.divider
       });
+      this.loading = true;
       this.$nextTick(() => {
         this.$refs.form.reset();
         this.$bvModal.hide("add-divider");

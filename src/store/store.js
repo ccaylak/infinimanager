@@ -7,18 +7,18 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     dashboards: [],
-    dashboard: null,
-    widgets: []
+    dashboard: {
+      dashboard: null,
+      widgets: []
+    }
   },
   actions: {
     async loadDashboards({ commit }) {
       await axios
         .get(`${process.env.VUE_APP_BASE_URL}/api/dashboards`)
-        .then(response => {
-          commit(
-            "SET_DASHBOARDS",
-            response.data._embedded.dashboardResourceList
-          );
+        .then(response => response.data._embedded.dashboardResourceList)
+        .then(dashboards => {
+          commit("SET_DASHBOARDS", dashboards);
         })
         .catch(() => {
           console.log("No dashboards available");
@@ -27,10 +27,10 @@ export default new Vuex.Store({
     async loadDashboard({ commit }, slug) {
       await axios
         .get(`${process.env.VUE_APP_BASE_URL}/api/dashboards/${slug}`)
-        .then(response => {
-          commit("SET_DASHBOARD", response.data);
+        .then(response => response.data)
+        .then(dashboard => {
+          commit("SET_DASHBOARD", dashboard);
         })
-        .then(() => new Promise(resolve => setTimeout(resolve, 2000)))
         .catch(error => {
           if (error.response.status === 404) {
             Vue.$snotify.error(`Dashboard with slug "${slug}" does not exist`);
@@ -44,10 +44,11 @@ export default new Vuex.Store({
           slug: dashboard.slug,
           description: dashboard.description
         })
-        .then(response => {
-          commit("ADD_DASHBOARD", response.data);
+        .then(response => response.data)
+        .then(dashboard => {
+          commit("ADD_DASHBOARD", dashboard);
           Vue.$snotify.success(
-            `Dashboard "${response.data.name}" has been created!`
+            `Dashboard "${dashboard.name}" has been created!`
           );
         })
         .catch(error => {
@@ -76,11 +77,9 @@ export default new Vuex.Store({
         .get(
           `${process.env.VUE_APP_BASE_URL}/api/dashboards/${slug}/widgets/all`
         )
-        .then(response => {
-          commit(
-            "SET_WIDGETS",
-            response.data._embedded.widgetConfigResourceList
-          );
+        .then(response => response.data._embedded.widgetConfigResourceList)
+        .then(widgets => {
+          commit("SET_WIDGETS", widgets);
         })
         .catch(() => {
           Vue.$snotify.warning("No widgets available", {
@@ -98,10 +97,11 @@ export default new Vuex.Store({
             type: "divider"
           }
         )
-        .then(response => {
-          commit("ADD_WIDGET", response.data);
+        .then(response => response.data)
+        .then(divider => {
+          commit("ADD_WIDGET", divider);
           Vue.$snotify.success(
-            `Divider widget "${response.data.title}" has been created!`
+            `Divider widget "${divider.title}" has been created!`
           );
         });
     },
@@ -127,10 +127,11 @@ export default new Vuex.Store({
             ]
           }
         )
-        .then(response => {
-          commit("ADD_WIDGET", response.data);
+        .then(response => response.data)
+        .then(jenkins => {
+          commit("ADD_WIDGET", jenkins);
           Vue.$snotify.success(
-            `Jenkins widget "${response.data.title}" has been created!`
+            `Jenkins widget "${jenkins.title}" has been created!`
           );
         });
     },
@@ -165,10 +166,11 @@ export default new Vuex.Store({
             ]
           }
         )
-        .then(response => {
-          commit("ADD_WIDGET", response.data);
+        .then(response => response.data)
+        .then(platform => {
+          commit("ADD_WIDGET", platform);
           Vue.$snotify.success(
-            `Platform widget "${response.data.title}" has been created!`
+            `Platform widget "${platform.title}" has been created!`
           );
         });
     },
@@ -193,7 +195,7 @@ export default new Vuex.Store({
       state.dashboards = dashboards;
     },
     SET_DASHBOARD(state, dashboard) {
-      state.dashboard = dashboard;
+      state.dashboard.dashboard = dashboard;
     },
     ADD_DASHBOARD(state, dashboard) {
       state.dashboards.push(dashboard);
@@ -206,15 +208,15 @@ export default new Vuex.Store({
       });
     },
     SET_WIDGETS(state, widgets) {
-      state.widgets = widgets;
+      state.dashboard.widgets = widgets;
     },
     ADD_WIDGET(state, widget) {
-      state.widgets.push(widget);
+      state.dashboard.widgets.push(widget);
     },
     DELETE_WIDGET(state, widgetId) {
-      state.widgets.forEach((widget, i) => {
+      state.dashboard.widgets.forEach((widget, i) => {
         if (widget.widgetId === widgetId) {
-          state.widgets.splice(i, 1);
+          state.dashboard.widgets.splice(i, 1);
         }
       });
     }

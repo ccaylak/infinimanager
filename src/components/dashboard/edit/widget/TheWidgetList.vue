@@ -1,16 +1,16 @@
 <template>
   <div>
     <div v-for="(uwidget, index) in widgets" :key="uwidget._id">
-      <template v-if="uwidget.type === 'divider'">
+      <div v-if="uwidget.type === 'divider'">
         <divider-widget
           :title="uwidget.title"
           :description="uwidget.description"
           :widget-id="uwidget.widgetId"
           :dashboard-id="uwidget.dashboardId"
         ></divider-widget>
-      </template>
+      </div>
 
-      <template v-if="uwidget.type === 'divider'">
+      <div v-if="uwidget.type === 'divider'">
         <b-card-group columns>
           <div
             v-for="widget in splitWidgets(widgets.slice(index + 1))"
@@ -34,7 +34,7 @@
             </div>
           </div>
         </b-card-group>
-      </template>
+      </div>
     </div>
   </div>
 </template>
@@ -61,9 +61,12 @@ export default {
   created() {
     this.$store.dispatch("loadWidgets", this.$route.params.slug);
   },
+  destroyed() {
+    this.$store.state.dashboard.widgets = [];
+  },
   computed: {
     widgets() {
-      return this.$store.state.widgets;
+      return this.$store.state.dashboard.widgets;
     }
   }
 };

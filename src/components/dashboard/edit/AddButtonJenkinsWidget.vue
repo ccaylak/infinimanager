@@ -136,8 +136,15 @@
             </b-form-radio-group>
           </b-form-group>
           <!-- Submit button -->
-          <b-button class="mt-3" type="submit" block
-            >Create jenkins widget
+          <b-button class="mt-3" type="submit" block>
+            <span v-if="!loading">Create jenkins widget</span>
+            <b-spinner
+              v-if="loading"
+              class="justify-content-center"
+              label="Loading.."
+              variant="light"
+              small
+            ></b-spinner>
           </b-button>
         </b-form>
       </ValidationObserver>
@@ -153,28 +160,31 @@ export default {
       jenkins: {
         selected: "no",
         title: "",
-        interval: null,
+        interval: 1,
         url: "",
         username: "",
         password: ""
-      }
+      },
+      loading: false
     };
   },
   methods: {
-    onSubmit() {
+    async onSubmit() {
       this.$refs.form.validate().then(success => {
         if (!success) {
           return 0;
         }
       });
-      this.$store.dispatch("addJenkins", {
+      this.loading = true;
+      await this.$store.dispatch("addJenkins", {
         slug: this.$route.params.slug,
         jenkins: this.jenkins
       });
+      this.loading = false;
       this.$nextTick(() => {
         this.$refs.form.reset();
         this.$bvModal.hide("add-jenkins");
-        //this.clearInput(this.jenkins);
+        this.clearInput(this.jenkins);
       });
     }
   }

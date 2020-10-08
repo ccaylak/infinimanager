@@ -186,8 +186,15 @@
             </b-form-radio-group>
           </b-form-group>
           <!-- Submit button -->
-          <b-button class="mt-3" type="submit" block
-            >Create platform widget
+          <b-button class="mt-3" type="submit" block>
+            <span v-if="!loading">Create platform widget</span>
+            <b-spinner
+              v-if="loading"
+              class="justify-content-center"
+              label="Loading.."
+              variant="light"
+              small
+            ></b-spinner>
           </b-button>
         </b-form>
       </ValidationObserver>
@@ -214,20 +221,23 @@ export default {
           interval: null,
           selected: "no"
         }
-      }
+      },
+      loading: false
     };
   },
   methods: {
-    onSubmit() {
+    async onSubmit() {
       this.$refs.form.validate().then(success => {
         if (!success) {
           return 0;
         }
       });
-      this.$store.dispatch("addPlatform", {
+      this.loading = true;
+      await this.$store.dispatch("addPlatform", {
         slug: this.$route.params.slug,
         platform: this.platform
       });
+      this.loading = false;
       this.$nextTick(() => {
         this.$refs.form.reset();
         this.$bvModal.hide("add-platform");

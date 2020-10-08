@@ -64,7 +64,7 @@ export default {
     AddButtonJenkinsWidget,
     AddButtonDividerWidget
   },
-  created() {
+  mounted() {
     this.getDashboards();
   },
   data() {
@@ -74,7 +74,7 @@ export default {
   },
   computed: {
     dashboard() {
-      return this.$store.state.dashboard;
+      return this.$store.state.dashboard.dashboard;
     }
   },
   methods: {
